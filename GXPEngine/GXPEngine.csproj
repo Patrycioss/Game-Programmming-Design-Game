@@ -45,6 +45,10 @@
     <Compile Include="GXPEngine\AddOns\TiledLoader.cs" />
     <Compile Include="GXPEngine\Objects\Mouse.cs" />
     <Compile Include="GXPEngine\Objects\Square.cs" />
+    <Compile Include="GXPEngine\SceneStuff\Layer.cs" />
+    <Compile Include="GXPEngine\SceneStuff\MakeScene.cs" />
+    <Compile Include="GXPEngine\SceneStuff\Scene.cs" />
+    <Compile Include="GXPEngine\SceneStuff\SceneManager.cs" />
     <Compile Include="MyGame.cs" />
     <Compile Include="GXPEngine\Core\Canvas.cs" />
     <Compile Include="GXPEngine\Game.cs" />
@@ -86,8 +90,5 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="GXPEngine\SceneStuff" />
   </ItemGroup>
 </Project>

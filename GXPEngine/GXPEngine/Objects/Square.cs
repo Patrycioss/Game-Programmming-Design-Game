@@ -5,10 +5,8 @@ namespace GXPEngine.Objects
 {
     public class Square : Sprite
     {
-        public Square(Texture2D sprite, float x, float y) : base(sprite, true)
+        public Square() : base("square.png", true, true)
         {
-            this.x = x;
-            this.y = y;
         }
         void Update(){}
     }
