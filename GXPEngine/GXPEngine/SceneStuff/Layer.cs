@@ -2,7 +2,7 @@
 
 namespace GXPEngine.SceneStuff
 {
-    public class Layer
+    public class Layer : GameObject
     {
         public List<GameObject> gameObjects;
         private List<GameObject> removeObjects;
@@ -16,13 +16,19 @@ namespace GXPEngine.SceneStuff
         public void Update()
         {
             if (removeObjects.Count > 0)
-                foreach (var gameObject in removeObjects)
-                    gameObjects.Remove(gameObject);
+            {
+                foreach (Sprite sprite in removeObjects)
+                {
+                    gameObjects.Remove(sprite);
+                }
+                removeObjects.Clear();
+            }
         }
 
         public void AddObject(GameObject gameObject)
         {
             gameObjects.Add(gameObject);
+            this.AddChild(gameObject);
         }
 
         public void RemoveObject(GameObject gameObject)

@@ -4,19 +4,9 @@ using GXPEngine;
 
 namespace GXPEngine.GXPEngine.SceneStuff
 {
-    public class MakeScene
+    public static class MakeScene
     {
-        private int width;
-        private int height;
-        
-
-        public MakeScene(int width, int height)
-        {
-            this.width = width;
-            this.height = height;
-        }
-        
-        public Scene Template()
+        public static Scene Template()
         {
             
             //Create a new Scene with an amount of layers based on the depth of the scene
@@ -35,7 +25,7 @@ namespace GXPEngine.GXPEngine.SceneStuff
             return scene;
         }
         
-        public Scene Start()
+        public static Scene Start()
         {
             
             //Create a new Scene with an amount of layers based on the depth of the scene
@@ -47,8 +37,15 @@ namespace GXPEngine.GXPEngine.SceneStuff
             //Create a gameObject based on a class and add it to the correct layer
             Square square = new Square();
             square.SetXY(0, 0);
-            square.SetScaleXY(500,500);
-            scene.layers[0].AddObject(square);
+            square.width = 5;
+            square.height = 5;
+            scene.layers[3].AddObject(square);
+
+            Square otherSquare = new Square();
+            otherSquare.SetXY(5,5);
+            square.width = 10;
+            square.height = 10;
+            scene.layers[2].AddObject(otherSquare);
 
             return scene;
         }
