@@ -3,6 +3,8 @@ using System.Reflection;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Security.Cryptography;
 using GXPEngine.Core;
+using GXPEngine.GXPEngine.AddOns;
+using TiledMapParser;
 
 namespace GXPEngine
 {
@@ -11,6 +13,9 @@ namespace GXPEngine
         public Vector2 position, velocity, acceleration;
 
         private Vector2 constraintPoint1, constraintPoint2;
+
+        private int layerRange;
+        private int currentLayer;
         
         
        public Player(float startX, float startY) : base("barry_big.png", 7, 1, 7, true, true)
@@ -25,6 +30,9 @@ namespace GXPEngine
             constraintPoint1 = new Vector2(-width/2, height);
             constraintPoint2 = new Vector2(-game.width/2 - width, game.height/2 - height);
 
+            layerRange = 0;
+            currentLayer = 0;
+
         }
 
         void Update()
@@ -38,19 +46,20 @@ namespace GXPEngine
             
             UpdatePosition();
 
-            UpdateScale();
+            UpdateLayer();
         }
         
         //Updates the position vector with the velocity vector and syncs
         //the vector with the x and y coordinates of the player.
         void UpdatePosition()
         {
-
-                
+            position.Set(x,y);
+            position.x += GetHorizontalMovement();
+            position.y += GetVerticalMovement();
          
             
             SetXY(position.x, position.y);
-           
+
         }
 
         void UpdateAcceleration()
@@ -82,9 +91,30 @@ namespace GXPEngine
             // }
         }
 
-        void UpdateScale()
+        void UpdateLayer()
         {
+            for (int i = 0; i < SceneManager.currentScene.layers.Count; i++)
+            {
+                int limit1 = game.height / 2 - height - i;
+                int limit2 = limit1 - 32;
+                
+                if (y < limit1 && y >= limit2)
+                {
+                    SceneManager.currentScene.MoveFromLayerToOther(name,currentLayer,i);
+                    break;
+                }
+            }
             
+        }
+
+        void SetCurrentLayer(int layer)
+        {
+            currentLayer = layer;
+        }
+
+        void CalcLayerRange(int layer)
+        {
+            layerRange = (game.height/2-height)/SceneManager.currentScene.layers.Count;
         }
         
         //Returns 1, 0 or -1 based on horizontal movement

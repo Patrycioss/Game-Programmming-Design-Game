@@ -1,42 +1,69 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace GXPEngine.SceneStuff
 {
     public class Layer : GameObject
     {
-        public List<GameObject> gameObjects;
-        private List<GameObject> removeObjects;
+        public Dictionary<string, GameObject> gameObjects;
+        private List<string> toBeRemoved;
+        private List<GameObject> toBeAdded;
 
         public Layer()
         {
-            gameObjects = new List<GameObject>();
-            removeObjects = new List<GameObject>();
+            gameObjects = new Dictionary<string, GameObject>();
+            toBeRemoved = new List<string>();
+            toBeAdded = new List<GameObject>();
         }
 
         public void Update()
         {
-            if (removeObjects.Count > 0)
+            if (toBeRemoved.Count > 0)
             {
-                foreach (Sprite sprite in removeObjects)
+                foreach (string objectName in toBeRemoved)
                 {
-                    gameObjects.Remove(sprite);
+                    gameObjects[objectName].Remove();
+                    gameObjects.Remove(objectName);
+                    
+
                 }
-                removeObjects.Clear();
+                toBeRemoved.Clear();
             }
+
+            if (toBeAdded.Count > 0)
+            {
+                foreach (GameObject gameObject in toBeAdded)
+                {
+                    gameObjects.Add(gameObject.name, gameObject); 
+                    AddChild(gameObject);
+                }
+                toBeAdded.Clear();
+            }
+        }
+
+        public void LateAddObject(GameObject gameObject)
+        {
+           toBeAdded.Add(gameObject);
         }
 
         public void AddObject(GameObject gameObject)
         {
-            gameObjects.Add(gameObject);
-            this.AddChild(gameObject);
+            gameObjects.Add(gameObject.name, gameObject);
+            AddChild(gameObject);
         }
-
-        public void RemoveObject(GameObject gameObject)
+        
+        public void LateRemoveObject(string objectName)
         {
-            removeObjects.Add(gameObject);
+            toBeRemoved.Add(objectName);
         }
 
-        public List<GameObject> ListOfObjects()
+        public void RemoveObject(string objectName)
+        {
+            gameObjects[objectName].Remove();
+            gameObjects.Remove(objectName);
+        }
+
+        public Dictionary<string,GameObject> ListOfObjects()
         {
             return gameObjects;
         }

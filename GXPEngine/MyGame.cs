@@ -13,8 +13,9 @@ public class MyGame : Game
 	public Camera camera;
 	public Mouse mouse;
 	public EasyDraw canvas;
-	public Scene currentScene;
 	public Player player;
+
+	public bool done = false;
 	
 	
 	public MyGame() : base(950, 550, true, false, 1900, 1100, true)
@@ -23,32 +24,36 @@ public class MyGame : Game
 		camera = new Camera(0, 0, width, height);
 		mouse = new Mouse();
 		canvas = new EasyDraw(width, height);
-
-		player = new Player(0, height/2.0f);
+		player = new Player(0, height/2.0f - 122);
 		
 		
 	//Making Scenes	
 		Scene newScene;
-
 		
 		//Make a starting scene
 		newScene = MakeScene.Start();
 		SceneManager.AddScene(newScene.name,newScene);
 		
 		
+		
+		
 	//Drawing scene	
 		//Set the scene currently displayed
-		SceneManager.currentScene = SceneManager.scenes["Start"];
-		Console.WriteLine(SceneManager.currentScene.name);
-		Console.WriteLine();
-		Console.WriteLine(game.HasChild(currentScene));
+		SceneManager.SetScene("Start");
+		
+
 
 	//Add Special thingies	
 		AddChild(canvas);
 		AddChild(SceneManager.currentScene);
-		AddChild(player);
 		AddChild(camera);
 		AddChild(mouse);
+
+
+		Console.WriteLine(SceneManager.scenes["Start"].layers[3].gameObjects.ContainsKey("s1"));
+		
+		SceneManager.currentScene.layers[0].AddObject(player);
+
 
 	}
 
@@ -56,6 +61,14 @@ public class MyGame : Game
 	void Update()
 	{
 		// Console.WriteLine(Input.mouseX + ", "+ Input.mouseY);
+
+		// Console.WriteLine(SceneManager.scenes["Start"].layers[3].gameObjects["s1"]);
+		if (Input.GetKey(Key.G) && !done)
+		{
+			SceneManager.scenes["Start"].MoveFromLayerToOther("s1",3,1);
+			done = true;
+		}
+		
 		
 	}
 	

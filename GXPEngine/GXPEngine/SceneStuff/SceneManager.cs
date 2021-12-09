@@ -17,5 +17,10 @@ namespace GXPEngine.GXPEngine.AddOns
         {
             scenes.Add(name,scene);
         }
+
+        public static void SetScene(string sceneName)
+        {
+            currentScene = scenes[sceneName];
+        }
     }
 }
