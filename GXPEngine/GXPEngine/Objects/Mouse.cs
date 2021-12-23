@@ -4,14 +4,17 @@
     {
         public Mouse() : base("cursor.png", true, false)
         {
-            width = 10;
-            height = 15;
+            width = 30;
+            height = 45;
         }
 
         void Update()
         {
             this.x = Input.mouseX;
             this.y = Input.mouseY;
+            
         }
+        
+        
     }
 }

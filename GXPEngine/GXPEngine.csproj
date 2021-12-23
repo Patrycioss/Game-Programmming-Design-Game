@@ -50,6 +50,7 @@
     <Compile Include="GXPEngine\SceneStuff\MakeScene.cs" />
     <Compile Include="GXPEngine\SceneStuff\Scene.cs" />
     <Compile Include="GXPEngine\SceneStuff\SceneManager.cs" />
+    <Compile Include="GXPEngine\Utils\Extra.cs" />
     <Compile Include="MyGame.cs" />
     <Compile Include="GXPEngine\Core\Canvas.cs" />
     <Compile Include="GXPEngine\Game.cs" />

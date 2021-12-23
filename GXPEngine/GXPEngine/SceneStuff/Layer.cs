@@ -24,8 +24,6 @@ namespace GXPEngine.SceneStuff
                 {
                     gameObjects[objectName].Remove();
                     gameObjects.Remove(objectName);
-                    
-
                 }
                 toBeRemoved.Clear();
             }

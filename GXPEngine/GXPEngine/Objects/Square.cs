@@ -7,6 +7,8 @@ namespace GXPEngine.Objects
     {
         public Square() : base("square.png", true, true)
         {
+            
+            
         }
         void Update(){}
     }
