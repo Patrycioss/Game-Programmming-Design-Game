@@ -8,7 +8,7 @@
     <ProjectGuid>{B5126D4C-7FE0-4552-BC8C-E68D529C22B2}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>GXPEngine</RootNamespace>
-    <AssemblyName>GXPEngine</AssemblyName>
+    <AssemblyName>IsometricGame</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -50,6 +50,7 @@
     <Compile Include="GXPEngine\SceneStuff\MakeScene.cs" />
     <Compile Include="GXPEngine\SceneStuff\Scene.cs" />
     <Compile Include="GXPEngine\SceneStuff\SceneManager.cs" />
+    <Compile Include="GXPEngine\StageLoader.cs" />
     <Compile Include="GXPEngine\Utils\Extra.cs" />
     <Compile Include="MyGame.cs" />
     <Compile Include="GXPEngine\Core\Canvas.cs" />
