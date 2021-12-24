@@ -1,0 +1,3 @@
+[submodule "GXPEngine/GXPEngine"]
+	path = GXPEngine/GXPEngine
+	url = https://github.com/Patrycioss/GXPEngine
