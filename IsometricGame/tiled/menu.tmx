@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="64" tileheight="64" infinite="0" nextlayerid="4" nextobjectid="25">
+ <tileset firstgid="1" name="MainSheet" tilewidth="64" tileheight="64" tilecount="104" columns="13">
+  <image source="../mario clone pack or sumthin/Tilesheet/sokoban_tilesheet.png" width="832" height="512"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="92" duration="100"/>
+    <frame tileid="93" duration="200"/>
+    <frame tileid="91" duration="100"/>
+    <frame tileid="92" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="105" name="Collectibles" tilewidth="64" tileheight="64" tilecount="3" columns="3">
+  <image source="../Sprites/collectibles/collectible_sheet.png" width="192" height="64"/>
+ </tileset>
+ <tileset firstgid="108" name="enemies_spritesheet" tilewidth="64" tileheight="64" tilecount="6" columns="2">
+  <image source="../Sprites/enemies/enemies_spritesheet.png" width="128" height="192"/>
+ </tileset>
+ <tileset firstgid="114" name="Slimes" tilewidth="64" tileheight="37" tilecount="2" columns="2">
+  <image source="../Sprites/enemies/green_slime2.png" width="128" height="37"/>
+  <tile id="0" type="Slime">
+   <properties>
+    <property name="Green" value=""/>
+   </properties>
+  </tile>
+  <tile id="1" type="Slime">
+   <properties>
+    <property name="Green" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer id="1" name="Tile Layer 1" width="30" height="17">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,40,40,0,0,0,
+0,0,0,0,40,40,40,40,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,40,40,40,40,0,0,
+0,0,0,0,40,40,40,40,40,0,0,0,0,0,0,0,0,0,0,0,109,0,40,40,40,40,40,40,0,0,
+0,0,0,0,0,0,40,40,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,40,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,88,88,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,88,88,88,88,88,88,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,88,85,85,85,85,85,85,88,0,0,
+0,0,0,0,0,105,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,85,85,85,85,85,85,0,0,0,
+0,0,0,0,0,2,105,0,0,0,0,0,0,0,0,0,0,0,0,0,0,85,85,85,85,85,85,0,0,0,
+0,0,0,0,2,2,2,0,105,0,0,0,0,0,6,6,0,105,0,0,0,85,12,85,16,85,85,0,0,0,
+0,0,105,2,2,2,2,2,2,115,0,106,0,6,6,6,6,6,0,111,0,85,85,85,16,85,85,0,0,0,
+89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,
+91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,
+91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,
+91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91
+</data>
+ </layer>
+ <objectgroup id="2" name="Decoration"/>
+ <objectgroup id="3" name="Selection">
+  <object id="16" x="768" y="192" width="465.382" height="73.626">
+   <text pixelsize="64" wrap="1">Game Title</text>
+  </object>
+  <object id="17" type="Tutorial" x="768" y="320" width="384" height="64"/>
+  <object id="18" type="Stage1" x="768" y="448" width="384" height="64"/>
+  <object id="19" type="Stage2" x="768" y="576" width="384" height="64"/>
+  <object id="20" x="904.5" y="329.5" width="120" height="47">
+   <text pixelsize="32" wrap="1">Tutorial</text>
+  </object>
+  <object id="21" x="901" y="457" width="120" height="47">
+   <text pixelsize="32" wrap="1">Stage 1</text>
+  </object>
+  <object id="22" x="904" y="587.5" width="120" height="47">
+   <text pixelsize="32" wrap="1">Stage 2</text>
+  </object>
+ </objectgroup>
+</map>
