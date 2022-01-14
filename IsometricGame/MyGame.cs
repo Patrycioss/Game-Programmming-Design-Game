@@ -1,92 +1,81 @@
 using System;									// System contains a lot of default C# libraries 
 using GXPEngine;                                // GXPEngine contains the engine
-using System.Drawing;							// System.Drawing contains drawing tools such as Color definitions
+using System.Drawing;
+using System.Drawing.Design; // System.Drawing contains drawing tools such as Color definitions
 using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Activation;
 using System.Text;
 using System.Xml.Schema;
 using TiledMapParser; 
 using GXPEngine.Core;
-using GXPEngine.GXPEngine.AddOns;
-using GXPEngine.SceneStuff;
-using GXPEngine.Objects;
+
 
 public class MyGame : Game
 {
+	public StageCreator StageCreator;
 	public StageLoader StageLoader;
-
-	public EasyDraw canvas;
-	public MakeScene makeScene;
+	public Background currentBackground;
 	public Player player;
+	public Menu menu;
+	public Hud hud;
 	
-	public bool done = false;
-	public bool debugging = false;
-
-
-	public MyGame() : base(1900, 1080, false, false, -1, -1, true)
+	public Vector2 startPosition;
+	
+	public MyGame() : base(1900, 1080, false, true, -1, -1, true)
 	{
-		// makeScene = new MakeScene();
-		// //Making Scenes	
-		// 	Scene newScene;
-		// 	
-		// 	//Make a starting scene
-		// 	newScene = makeScene.Start();
-		// 	SceneManager.AddScene(newScene.name,newScene);
-		// 	
-		// //Drawing scene	
-		// 	//Set the scene currently displayed
-		// 	SceneManager.SetScene("Start");
-		// 	
-		// //Add Special thingies	
-		// 	AddChild(canvas);
-		// 	AddChild(SceneManager.currentScene);
-		//
-		// 	
-		// //Add the player to the currentScene	
-		// 	SceneManager.currentScene.layers[0].AddObject(player);
-		// 	
-		// 
-
-		
-		//Initialize Stageloader
+		//Initialzing
 		StageLoader = new StageLoader();
+		StageCreator = new StageCreator();
+
+		player = new Player(startPosition.x, startPosition.y);
 		
+		menu = new Menu();
+		hud = new Hud();
 		
-		//Initialize special thingies	
-		canvas = new EasyDraw(width, height, false);
-		player = new Player(0,0);
-
-		//Temp background
-		canvas.HorizontalShapeAlign = CenterMode.Min;
-		canvas.VerticalShapeAlign = CenterMode.Min;
-
-		canvas.NoStroke();
-		canvas.Fill(255, 0, 0);
-		canvas.Rect(0, 0, width, height);
-
-		canvas.Fill(0);
-		canvas.Ellipse(0, 0, 10, 10);
-
-
-		StageLoader.LoadStage("stage1/stage1.tmx");
+		//Temp solution for animations		
+		targetFps = 5;
 		
-		AddChild(StageLoader.stageContainer);
-		AddChild(player);
+		//Background	
+		currentBackground = new Background("backgrounds/standard.png");
+		
+		//Standard startposition of player in a stage
+		startPosition = new Vector2(150, 800);
+		
+		AddChild(currentBackground);
+
+		AddChild(menu);
+
+	}
+	
+	void Update()
+	{
+		Scroll();
+
+
+
+		if (Input.GetKey(Key.K))
+		{
+			player.Damage(3);
+		}
 		
 	}
 
-
-	void Update()
+	void Scroll()
 	{
-	
-		
-		// //Debug mode
-		// if (Input.GetKeyDown(Key.B))
-		// {
-		// 	SceneManager.currentScene.ToggleDebug();
-		// }
+		int boundary = width / 2;
+		if (player.x + StageLoader.stageContainer.x < boundary)
+		{
+			StageLoader.stageContainer.x = boundary - player.x;
+		}
+		else if (player.x + StageLoader.stageContainer.x > width - boundary)
+		{
+			StageLoader.stageContainer.x = width - boundary - player.x;
+		}
 
-
-				
+		if (StageLoader.stageContainer.x > 0)
+		{
+			StageLoader.stageContainer.x = 0;
+		}
 		
 	}
 	
