@@ -18,11 +18,17 @@ public class MyGame : Game
 	public Player player;
 	public Menu menu;
 	public Hud hud;
+
+	private int scrollBoundary;
+
+	
 	
 	public Vector2 startPosition;
 	
 	public MyGame() : base(1900, 1080, false, true, -1, -1, true)
 	{
+		scrollBoundary = width / 2;
+		
 		//Initialzing
 		StageLoader = new StageLoader();
 		StageCreator = new StageCreator();
@@ -33,7 +39,7 @@ public class MyGame : Game
 		hud = new Hud();
 		
 		//Temp solution for animations		
-		targetFps = 5;
+		// targetFps = 5;
 		
 		//Background	
 		currentBackground = new Background("backgrounds/standard.png");
@@ -62,20 +68,29 @@ public class MyGame : Game
 
 	void Scroll()
 	{
-		int boundary = width / 2;
-		if (player.x + StageLoader.stageContainer.x < boundary)
+		if (player.x + StageLoader.stageContainer.x < scrollBoundary)
 		{
-			StageLoader.stageContainer.x = boundary - player.x;
+			StageLoader.stageContainer.x = scrollBoundary - player.x;
 		}
-		else if (player.x + StageLoader.stageContainer.x > width - boundary)
+		else if (player.x + StageLoader.stageContainer.x > width - scrollBoundary)
 		{
-			StageLoader.stageContainer.x = width - boundary - player.x;
+			StageLoader.stageContainer.x = width - scrollBoundary - player.x;
 		}
-
+		
 		if (StageLoader.stageContainer.x > 0)
 		{
 			StageLoader.stageContainer.x = 0;
 		}
+
+		
+		
+		
+		else if (StageLoader.stageContainer.x < -StageLoader.mapWidth + game.width)
+		{
+			StageLoader.stageContainer.x = -StageLoader.mapWidth + game.width;
+		}
+
+
 		
 	}
 	
