@@ -9,7 +9,10 @@
         public Sound moveSound;
         public Sound attackSound;
 
-        public Entity(string filePath, int columns, int rows, int frames) : base(filePath, columns, rows, frames, true, true){}
+        public Entity(string filePath, int columns, int rows, int frames) : base(filePath, columns, rows, frames, true, true)
+        {
+            _animationDelay = 40;
+        }
 
         public virtual void Update(){}
 

@@ -170,13 +170,11 @@
   <object id="224" type="Coin" gid="75" x="4032" y="576" width="64" height="64"/>
  </objectgroup>
  <objectgroup id="2" name="Entities">
-  <object id="1" type="Player" gid="92" x="5184" y="832" width="64" height="64"/>
+  <object id="1" type="Player" gid="92" x="192" y="832" width="64" height="64"/>
   <object id="50" type="Slime" gid="121" x="1280" y="832" width="64" height="37"/>
   <object id="52" type="Slime" gid="1073741945" x="2176" y="795" width="64" height="37" rotation="180"/>
   <object id="162" type="Flyer" gid="1073741939" x="3840" y="512" width="64" height="64" rotation="180"/>
   <object id="229" type="Slime" gid="1073741945" x="4096" y="731" width="64" height="37" rotation="180"/>
-  <object id="248" name="Blue" type="Ghost" gid="119" x="1728" y="768" width="64" height="64"/>
-  <object id="249" name="Red" type="Ghost" gid="128" x="2176" y="768" width="64" height="64"/>
  </objectgroup>
  <objectgroup id="3" name="Signs">
   <object id="53" name="Watch out for monsters!" type="Sign" gid="109" x="1152" y="640" width="64" height="64"/>

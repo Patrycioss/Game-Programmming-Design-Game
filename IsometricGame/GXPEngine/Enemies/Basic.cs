@@ -9,11 +9,18 @@ namespace GXPEngine.Enemies
         public Basic(string filePath, int columns, int rows, int frames) : base(filePath, columns, rows, frames)
         {
             SetCycle(0,2, animationDelay: Byte.MaxValue);
+
+            collider.isTrigger = true;
         }
 
         public override void Update()
         {
-            _hCollision = MoveUntilCollision(speed,0);
+            _hCollision = MoveUntilCollision(speed * Time.deltaTime,0);
+
+            if (HitTest(_myGame.player))
+            {
+                _myGame.player.Damage(attackDamage);
+            }
             
 
             if (_hCollision != null)
@@ -42,7 +49,7 @@ namespace GXPEngine.Enemies
     {
         public GreenSlime() : base("sprites/enemies/green_slime2.png", 2, 1, 2)
         {
-            speed = 1;
+            speed = 0.2f;
             attackDamage = 1;
             health = 1;
         }
@@ -53,9 +60,9 @@ namespace GXPEngine.Enemies
     {
         public Flyer() : base("sprites/enemies/flying2.png", 2, 1, 2)
         {
-            speed = 1;
+            speed = 0.2f;
             attackDamage = 1;
-            health = 2;
+            health = 2; 
         }
     }
     

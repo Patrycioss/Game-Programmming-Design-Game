@@ -33,10 +33,11 @@ public class MyGame : Game
 		StageLoader = new StageLoader();
 		StageCreator = new StageCreator();
 
-		player = new Player(startPosition.x, startPosition.y);
-		
-		menu = new Menu();
+		player = new Player();
 		hud = new Hud();
+
+		menu = new Menu();
+		
 		
 		//Temp solution for animations		
 		// targetFps = 5;
@@ -62,6 +63,11 @@ public class MyGame : Game
 		if (Input.GetKey(Key.K))
 		{
 			player.Damage(3);
+		}
+
+		if (Input.GetKey((Key.J)))
+		{
+			player.Damage(1);
 		}
 		
 	}

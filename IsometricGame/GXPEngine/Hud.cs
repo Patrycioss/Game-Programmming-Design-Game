@@ -29,7 +29,7 @@ namespace GXPEngine
             coinAmountPos = new Vector2(1000,1000);
             
             //HP
-            hearts = new Sprite[3];
+            hearts = new Sprite[_myGame.player.maxHealth];
             healthBarOrigin = new Vector2(-1000, -1000);
             
             //Place to add extra exceptions
@@ -53,6 +53,14 @@ namespace GXPEngine
             //Starting text
             UpdateCanvas();
         }
+
+        public void Reset()
+        {
+            coinAmount = 0;
+            hearts = new Sprite[_myGame.player.maxHealth];
+
+            UpdateCanvas();
+        }
         
        public void UpdateCanvas()
         {
@@ -72,7 +80,7 @@ namespace GXPEngine
                 case "HealthBarOrigin":
                     healthBarOrigin.Set(obj.X,obj.Y);
 
-                    for (int i = 0; i < _myGame.player.health; i++)
+                    for (int i = 0; i < hearts.Length; i++)
                     {
                         AddHeart();
                     }
@@ -126,5 +134,30 @@ namespace GXPEngine
                 AddHeart();
             }
         }
+
+
+        public void FixHearts()
+        {
+            //Resetting health in HUD
+            if (_myGame.player.health != hearts.Length)
+            {
+                if (_myGame.player.health < hearts.Length)
+                {
+                    for (int i = 0; i < Mathf.Abs(_myGame.player.health - hearts.Length); i++)
+                    {
+                        _myGame.hud.RemoveHeart();
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < Mathf.Abs(_myGame.player.health - hearts.Length); i++)
+                    {
+                        _myGame.hud.AddHeart();
+                    }
+                }
+            }    
+        }
+        
+        
     }
 }

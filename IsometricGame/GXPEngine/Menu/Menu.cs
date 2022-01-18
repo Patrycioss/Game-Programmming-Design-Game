@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TiledMapParser;
 
 namespace GXPEngine
@@ -7,10 +8,25 @@ namespace GXPEngine
     {
         private TiledLoader _tiledLoader;
 
+        public Dictionary<Stages, Selection> Selections;   
+
         public Menu()
         {
             //Initializing
             _myGame.ShowMouse(true);
+
+            Selections = new Dictionary<Stages, Selection>();
+            
+            Selections.Add(Stages.Tutorial,new Selection(Stages.Tutorial, false, 9));
+            Selections.Add(Stages.Stage1,new Selection(Stages.Stage1, true, 0));
+            Selections.Add(Stages.Stage2,new Selection(Stages.Stage2, true, 0));
+
+
+            foreach (Selection selection in Selections.Values)
+            {
+                AddChild(selection);
+            }
+            
             
             
             _tiledLoader = new TiledLoader("tiled/menu.tmx", this);
@@ -41,27 +57,27 @@ namespace GXPEngine
 
         void OnWeirdObjectCreated(Sprite sprite, TiledObject obj)
         {
-            Selection selection;
 
             switch (obj.Type)
             {
+                
+                
                 case "Stage1":
-                    selection = new Selection(Stages.stage1, true);
-                    selection.SetXY(obj.X,obj.Y);
-                    AddChild(selection);
+                    Selections[Stages.Stage1].SetXY(obj.X,obj.Y);
+                    
+
                     break;
                 
                 case "Stage2":
-                    selection = new Selection(Stages.stage2, true);
-                    selection.SetXY(obj.X,obj.Y);
-                    AddChild(selection);
+                    Selections[Stages.Stage2].SetXY(obj.X,obj.Y);
+        
                     break;
                 
                 case "Tutorial":
-                    selection = new Selection(Stages.tutorial, false);
-                    selection.SetXY(obj.X,obj.Y);
-                    AddChild(selection);
+                    Selections[Stages.Tutorial].SetXY(obj.X,obj.Y);
+     
                     break;
+
             }
         }
         

@@ -65,6 +65,8 @@ namespace GXPEngine
         public FireBullet(int speed, int damage, bool mirrored) : base("sprites/collectibles/powerups/fire_bullet.png", 4, 1, 4)
         {
             collider.isTrigger = true;
+            
+            SetScaleXY(2);
 
             bulletOffset = 5;
             attackDamage = damage;
@@ -72,13 +74,13 @@ namespace GXPEngine
             if (mirrored)
             {
                 Mirror(true, false);
-                SetXY(_myGame.player.x - bulletOffset, _myGame.player.center.y);
+                SetXY(_myGame.player.x - bulletOffset - _myGame.player.width, _myGame.player.y);
                 this.speed = -speed;
             }
             else
             {
                 this.speed = speed;
-                SetXY(_myGame.player.x + _myGame.player.width + bulletOffset, _myGame.player.center.y);
+                SetXY(_myGame.player.x + _myGame.player.width + bulletOffset, _myGame.player.y);
 
             } 
         }

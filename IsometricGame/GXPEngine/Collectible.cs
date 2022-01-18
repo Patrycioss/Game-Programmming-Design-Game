@@ -54,7 +54,6 @@ namespace GXPEngine
         {
             sound.Play(volume:2.0f);
             
-            _myGame.hud.AddHeart();
             _myGame.player.AddHealth(1);
         }
     }

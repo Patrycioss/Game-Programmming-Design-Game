@@ -20,7 +20,7 @@ namespace GXPEngine
         //PlayerInfo
         public State currentState;
 
-        public Vector2 speed;
+        public Vector2 velocity;
         
         
         public Vector2 center;
@@ -49,22 +49,21 @@ namespace GXPEngine
 
         //JUMP
         private float jumpForce;
-        private Timer jumpAnimationTimer;
-        private int jumpAnimationDuration;
 
         public Timer immunityTimer;
         public int immunityDuration;
 
-        public Player(float startX, float startY) : base("sprites/player/player.png", 3, 1, 3)
+        public Player() : base("sprites/player/player.png", 3, 1, 3)
         {
             //Positional info
-            x = startX;
-            y = startY;
+            // x = startX;
+            // y = startY;
             center = new Vector2(x + width / 2, y + height / 2);
 
             //Stats
             attackDamage = 1;
             health = 3;
+            maxHealth = 3;
             
             //Starting state
             currentState = State.Stand;
@@ -73,21 +72,23 @@ namespace GXPEngine
             immunityDuration = 2000;
 
             //Movement
-            baseSpeed = 0.3f;
+            baseSpeed = 0.4f;
             runSpeed = 0.5f;
             movementSpeed = baseSpeed;
             
             //Jumping
-            jumpForce = 0.8f;
-            jumpAnimationDuration = 2;
+            jumpForce = 1.4f;
 
             //Gravity
-            gravitationalForce = 0.012f;
+            gravitationalForce = 0.005f;
 
             //Animation
-            SetCycle(0, 2, Byte.MaxValue, true);
+            SetCycle(0, 2,switchFrame:true);
+            
         }
 
+        
+        
 
         void UpdateInformation()
         {
@@ -106,7 +107,10 @@ namespace GXPEngine
         {
             UpdateInformation();
             CheckIfGrounded();
-            AnimateFixed();
+            Animate();
+
+
+            Console.WriteLine(isGrounded);
             
             //Immunityframe
             if (immunityTimer != null)
@@ -136,8 +140,8 @@ namespace GXPEngine
             }
             
             //Move the player and store its vertical and horizontal collision
-            verticalCollision = MoveUntilCollision(0, speed.y * Time.deltaTime); 
-            horizontalCollision = MoveUntilCollision(speed.x * Time.deltaTime, 0);
+            verticalCollision = MoveUntilCollision(0, velocity.y * Time.deltaTime); 
+            horizontalCollision = MoveUntilCollision(velocity.x * Time.deltaTime, 0);
 
                 //STATES//
                 //This switch statement switches according to 1 of 3 states: Stand, Walk or Jump//
@@ -150,7 +154,7 @@ namespace GXPEngine
 
                         SetCycle(0,1,switchFrame: true);
                         
-                        speed.Set(0, 0);
+                        velocity.Set(0, 0);
                         
                         if (!isGrounded)
                         {
@@ -167,9 +171,6 @@ namespace GXPEngine
                         else if (Input.GetKey(Key.SPACE))
                         {
                             Jump();
-
-                            //TODO: Play Jump Audio
-
                             currentState = State.Jump;
                             break;
                         }
@@ -189,21 +190,18 @@ namespace GXPEngine
 
                         else if (Input.GetKey(Key.D))
                         {
-                            speed.x = movementSpeed;
+                            velocity.x = movementSpeed;
                             Mirror(false, false);
                         }
                         else if (Input.GetKey(Key.A))
                         {
-                            speed.x = -movementSpeed;
+                            velocity.x = -movementSpeed;
                             Mirror(true, false);
                         }
 
                         if (Input.GetKey(Key.SPACE))
                         {
                             Jump();
-
-                            //TODO: Play Jump Audio
-
                             currentState = State.Jump;
                             break;
 
@@ -219,34 +217,34 @@ namespace GXPEngine
 
                     case State.Jump:
                         
-                        speed.y += gravitationalForce;
+                        velocity.y += Time.deltaTime * gravitationalForce;
                             
 
                         if (Input.GetKey(Key.D) == Input.GetKey(Key.A))
                         {
-                            speed.x = 0.0f;
+                            velocity.x = 0.0f;
                         }
                         else if (Input.GetKey(Key.D))
                         {
-                            speed.x = movementSpeed;
+                            velocity.x = movementSpeed;
                             Mirror(false, false);
                  
                         }
                         else if (Input.GetKey(Key.A))
                         {
-                            speed.x = -movementSpeed;
+                            velocity.x = -movementSpeed;
                             Mirror(true, false);
                         }
 
                         if (isGrounded && (Input.GetKey(Key.A) != Input.GetKey(Key.D)))
                         {
-                            speed.y = 0;
+                            velocity.y = 0;
                             currentState = State.Walk;
                             break;
                         }
                         else if (isGrounded)
                         {
-                            speed.y = 0;
+                            velocity.y = 0;
                             currentState = State.Stand;
                             break;
                         }
@@ -262,27 +260,23 @@ namespace GXPEngine
             Walk,
             Jump
         }
-        
+
         void Jump()
         {
-            if (jumpAnimationTimer == null)
-            {
-                jumpAnimationTimer = new Timer(jumpAnimationDuration);
-            }
-
-            if (!jumpAnimationTimer.finished)
-            {
-                speed.y -= jumpForce;
-            }
-            else jumpAnimationTimer = null;
+            //TODO: Jump sound
+            velocity.y -= jumpForce;
         }
 
         public void CheckIfGrounded()
        {
            if (verticalCollision != null)
-            {
-                isGrounded = true;
-            }
+           {
+               if (verticalCollision.other.y > y)
+               {
+                   isGrounded = true;
+               }
+               else velocity.y = 0;
+           }
             else isGrounded = false;
        }
         public override void Damage(int amount)
@@ -307,8 +301,6 @@ namespace GXPEngine
                     }
                 }
             }
-
-           
         }
 
         public override void Kill()
@@ -317,13 +309,20 @@ namespace GXPEngine
             _myGame.RemoveChild(_myGame.StageLoader);
             _myGame.RemoveChild(_myGame.hud);
             _myGame.StageLoader.Clear();
-            AddHealth(3);
+            Reset();
         }
 
         public override void AddHealth(int amount)
         {
             health += amount;
             _myGame.hud.AddHealth(amount);
+        }
+
+        public void Reset()
+        {
+            health = maxHealth;
+            currentPowerup = null;
+            Mirror(false,false);
         }
     }
 }

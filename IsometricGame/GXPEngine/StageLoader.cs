@@ -16,11 +16,10 @@ namespace GXPEngine
         public TiledLoader currentStage;
         public string currentPath;
 
-        private Map info;
-        private string _folderName;
-        private Assembly _callingAssembly;
 
-        private string invisType;
+        public int mapWidth;
+        public int mapHeight;
+
         
 
         public StageLoader()
@@ -46,12 +45,6 @@ namespace GXPEngine
             stageContainer.SetXY(0,0);
             
             stagePath = ("tiled/stages/" + stagePath);
-            
-            
-            _folderName=Path.GetDirectoryName(stagePath);
-            _callingAssembly = Assembly.GetCallingAssembly();
-
-            
 
             if (stagePath != currentPath)
             {
@@ -71,7 +64,10 @@ namespace GXPEngine
 
                 currentStage.rootObject = stageContainer;
 
-                info = MapParser.ReadMap(stagePath);
+                mapWidth = currentStage.map.Width * currentStage.map.TileWidth;
+                mapHeight = currentStage.map.Height * currentStage.map.TileHeight;
+                    
+                
                 
                 
                 //Blocks
@@ -99,13 +95,24 @@ namespace GXPEngine
                 currentStage.LoadObjectGroups();
                 currentStage.OnObjectCreated -= OnWeirdObjectCreated;
 
+                //Setup barriers
+                Sprite barrier = new Sprite("sprites/tiles/checkers.png");
+                barrier.SetXY(-20,0);
+                barrier.width = 20;
+                barrier.height = mapHeight;
+                stageContainer.AddChild(barrier);
+
+                barrier = new Sprite("sprites/tiles/checkers.png");
+                barrier.SetXY(mapWidth,0);
+                barrier.width = 20;
+                barrier.height = mapHeight;
+                stageContainer.AddChild(barrier);
 
             }
         }
 
         private void OnWeirdObjectCreated(Sprite sprite, TiledObject obj)
         {
-            Console.WriteLine(obj.Type);
 
 
             switch (obj.Type)
@@ -146,11 +153,9 @@ namespace GXPEngine
                 case "Slime":
                     
                     Basic slime = new GreenSlime();
-                    Console.WriteLine("hoi");
 
                     if (obj.MirrorY)
                     {
-                        Console.WriteLine("haha");
                         slime.Mirror(true,false);
                         slime.SetXY(obj.X-64,obj.Y);
                     }
@@ -169,7 +174,6 @@ namespace GXPEngine
                     
                     if (obj.MirrorY)
                     {
-                        Console.WriteLine("haha");
                         flyer.Mirror(true,false);
                         flyer.SetXY(obj.X-64,obj.Y);
                     }
@@ -185,18 +189,18 @@ namespace GXPEngine
 
                     Ghost ghost;
 
-                    if (obj.HasProperty("red", "string"))
+                    if (obj.Name == "Red")
                     {
                         ghost = new RedGhost();
                     }
-                    else if (obj.HasProperty("blue", "string"))
+                    else if (obj.Name == "Blue")
                     {
                         ghost = new BlueGhost();
                     }
 
                     else
                     {
-                        throw new Exception("Ghost has no color, add color by adding a custom property in tiled with color name");
+                        throw new Exception("Ghost has no color, set color by giving name: Red or Blue" );
                     }
 
                     ghost.SetXY(obj.X,obj.Y-64);
@@ -218,7 +222,6 @@ namespace GXPEngine
                     break;
                 
                 default:
-                    invisType = obj.Type;
                     break;
                     
             }

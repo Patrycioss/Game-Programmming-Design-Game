@@ -8,10 +8,24 @@ namespace GXPEngine
         private Stages targetStage;
         private bool locked;
 
-        public Selection(Stages stage, bool locked) : base("sprites/selection/selection.png",3,1,3)
+        private EasyDraw canvas;
+        public int coinsCollected;
+        public int collectibleCoins;
+
+        public Selection(Stages stage, bool locked, int collectibleCoins) : base("sprites/selection/selection.png",3,1,3)
         {
             targetStage = stage;
             this.locked = locked;
+            this.collectibleCoins = collectibleCoins;
+            canvas = new EasyDraw(width, height);
+            
+            
+            //Text for amount of collected coins
+            canvas.Fill(0); 
+            canvas.TextAlign(CenterMode.Center,CenterMode.Center);
+            canvas.Text(coinsCollected + "/" + collectibleCoins, width*0.8f, height/2);
+            coinsCollected = 0;
+            AddChild(canvas);
         }
 
 
@@ -32,6 +46,8 @@ namespace GXPEngine
                 else currentFrame = 0;
             }
             else currentFrame = 2;
+            
+            
 
         }
 

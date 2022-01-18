@@ -44,11 +44,11 @@ namespace GXPEngine.Enemies
                 
                 if (ghosting)
                 {
-                    Move(direction.x, direction.y);
+                    Move(Time.deltaTime * direction.x, Time.deltaTime*direction.y);
                 }
                 else
                 {
-                    MoveUntilCollision(direction.x, direction.y);
+                    MoveUntilCollision(Time.deltaTime * direction.x, Time.deltaTime * direction.y);
                 }
             }
 
@@ -76,7 +76,7 @@ namespace GXPEngine.Enemies
         public RedGhost() : base("sprites/enemies/redGhost2.png", 2, 1, 2)
         {
             attackDamage = 1;
-            speed = 1.0f;
+            speed = 0.2f;
             health = 2;
             detectRadius = 500;
             ghosting = false;
@@ -89,7 +89,7 @@ namespace GXPEngine.Enemies
         public BlueGhost() : base("sprites/enemies/blueGhost2.png", 2, 1, 2)
         {
             attackDamage = 1;
-            speed = 0.5f;
+            speed = 0.1f;
             health = 1;
             detectRadius = 1000;
             ghosting = true;

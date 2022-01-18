@@ -2,7 +2,5 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/GXPEngine/GXPEngine" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/IsometricGame/GXPEngine" vcs="Git" />
   </component>
 </project>
