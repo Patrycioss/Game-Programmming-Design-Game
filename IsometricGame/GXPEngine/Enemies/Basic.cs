@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using GXPEngine.Core;
 
 namespace GXPEngine.Enemies
@@ -43,6 +44,13 @@ namespace GXPEngine.Enemies
             AnimateFixed();
 
         }
+
+        public override void Kill()
+        {
+            ParticleGenerator deathParticle = new ParticleGenerator(Color.LimeGreen, 1000);
+            LateDestroy();
+        }
+        
     }
 
     public class GreenSlime : Basic

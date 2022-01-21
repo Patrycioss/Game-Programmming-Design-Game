@@ -51,8 +51,8 @@
     <Compile Include="GXPEngine\Entity.cs" />
     <Compile Include="GXPEngine\Finish.cs" />
     <Compile Include="GXPEngine\Hud.cs" />
-    <Compile Include="GXPEngine\Menu\LevelSelect.cs" />
     <Compile Include="GXPEngine\Menu\Menu.cs" />
+    <Compile Include="GXPEngine\ParticleGenerator.cs" />
     <Compile Include="GXPEngine\Player.cs" />
     <Compile Include="GXPEngine\Powerup.cs" />
     <Compile Include="GXPEngine\Selection.cs" />

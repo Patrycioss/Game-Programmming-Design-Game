@@ -11,7 +11,11 @@
  </tile>
  <tile id="3" probability="100"/>
  <tile id="14" type="WalkthroughCrate"/>
- <tile id="15" type="WalkthroughRed"/>
+ <tile id="15" type="WalkthroughRed">
+  <objectgroup draworder="index" id="2">
+   <object id="2" x="29.3333" y="31.3333" width="34.6667" height="32.6667"/>
+  </objectgroup>
+ </tile>
  <tile id="16" type="WalkthroughBlue"/>
  <tile id="17" type="WalkthroughGreen"/>
  <tile id="18" type="WalkthroughGrey"/>

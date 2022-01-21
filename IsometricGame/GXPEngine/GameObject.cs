@@ -10,7 +10,7 @@ namespace GXPEngine
 	public abstract class GameObject : Transformable
 	{
 		public string name;
-		private Collider _collider;
+		protected Collider _collider;
 		
 		private List<GameObject> _children = new List<GameObject>();
 		private GameObject _parent = null;
@@ -505,10 +505,10 @@ namespace GXPEngine
 		/// Note: this is a very expensive method since it uses GetCollisions, and 
 		/// tunneling is possible since it uses discrete collision detection - use with care.
 		/// </summary>
-		virtual public Collision MoveUntilCollision(float vx, float vy) {
+		virtual public Collision MoveUntilCollision(float vx, float vy, bool includeTriggers = false) {
 			x += vx;
 			y += vy;
-			GameObject[] overlaps = GetCollisions (false,true);
+			GameObject[] overlaps = GetCollisions (includeTriggers,true);
 			x -= vx;
 			y -= vy;
 			return MoveUntilCollision (vx, vy, overlaps);

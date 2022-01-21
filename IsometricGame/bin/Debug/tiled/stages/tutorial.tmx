@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="90" height="17" tilewidth="64" tileheight="64" infinite="0" nextlayerid="6" nextobjectid="252">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="90" height="17" tilewidth="64" tileheight="64" infinite="0" nextlayerid="6" nextobjectid="256">
  <tileset firstgid="1" name="MainSheet" tilewidth="64" tileheight="64" tilecount="104" columns="13">
   <image source="../../mario clone pack or sumthin/Tilesheet/sokoban_tilesheet.png" width="832" height="512"/>
   <tile id="0">
@@ -171,10 +171,12 @@
  </objectgroup>
  <objectgroup id="2" name="Entities">
   <object id="1" type="Player" gid="92" x="192" y="832" width="64" height="64"/>
-  <object id="50" type="Slime" gid="121" x="1280" y="832" width="64" height="37"/>
+  <object id="50" type="Slime" gid="1073741945" x="832" y="795" width="64" height="37" rotation="180"/>
   <object id="52" type="Slime" gid="1073741945" x="2176" y="795" width="64" height="37" rotation="180"/>
   <object id="162" type="Flyer" gid="1073741939" x="3840" y="512" width="64" height="64" rotation="180"/>
   <object id="229" type="Slime" gid="1073741945" x="4096" y="731" width="64" height="37" rotation="180"/>
+  <object id="252" type="Fire" gid="125" x="256" y="832" width="64" height="64"/>
+  <object id="254" gid="121" x="386.667" y="756.333" width="64" height="37"/>
  </objectgroup>
  <objectgroup id="3" name="Signs">
   <object id="53" name="Watch out for monsters!" type="Sign" gid="109" x="1152" y="640" width="64" height="64"/>

@@ -69,6 +69,11 @@ public class MyGame : Game
 		{
 			player.Damage(1);
 		}
+
+		if (Input.GetKey(Key.H))
+		{
+			
+		}
 		
 	}
 

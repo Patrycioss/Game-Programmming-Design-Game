@@ -60,6 +60,8 @@ namespace GXPEngine
             // y = startY;
             center = new Vector2(x + width / 2, y + height / 2);
 
+            collider.isTrigger = true;
+
             //Stats
             attackDamage = 1;
             health = 3;
@@ -84,7 +86,14 @@ namespace GXPEngine
 
             //Animation
             SetCycle(0, 2,switchFrame:true);
+            //
+            // Sprite sprite = new Sprite("sprites/player/player_hitbox.png");
+            // sprite.alpha = 100;
+            // AddChild(sprite);
+            // _collider = new BoxCollider(sprite);
             
+            
+
         }
 
         
@@ -108,9 +117,6 @@ namespace GXPEngine
             UpdateInformation();
             CheckIfGrounded();
             Animate();
-
-
-            Console.WriteLine(isGrounded);
             
             //Immunityframe
             if (immunityTimer != null)
@@ -310,6 +316,8 @@ namespace GXPEngine
             _myGame.RemoveChild(_myGame.hud);
             _myGame.StageLoader.Clear();
             Reset();
+
+            _myGame.hud = new Hud();
         }
 
         public override void AddHealth(int amount)

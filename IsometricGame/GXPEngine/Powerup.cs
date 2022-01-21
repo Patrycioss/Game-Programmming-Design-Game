@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using GXPEngine.Core;
 using GXPEngine.Enemies;
@@ -27,8 +29,7 @@ namespace GXPEngine
 
     public class FireBulletShooter : Powerup
     {
-
-        public int bulletSpeed;
+        public float speed;
         public int coolDown;
         public int damage;
         private FireBullet _fireBullet;
@@ -38,8 +39,8 @@ namespace GXPEngine
             SetXY(_myGame.player.x,_myGame.player.y);
             visible = true;
 
+            speed = 0.5f;
             coolDown = 1000;
-            bulletSpeed = 3;
             damage = 1;
         }
 
@@ -49,7 +50,7 @@ namespace GXPEngine
             {
                 useTimer = new Timer(coolDown);
                 
-                _fireBullet = new FireBullet(bulletSpeed, damage,_myGame.player.mirrored);
+                _fireBullet = new FireBullet(speed, damage,_myGame.player.mirrored);
                 _myGame.StageLoader.stageContainer.AddChild(_fireBullet);
             }
         }
@@ -61,8 +62,10 @@ namespace GXPEngine
         private Collision _collision;
         
         public int bulletOffset;
+
+        private ParticleGenerator _particleGenerator;
         
-        public FireBullet(int speed, int damage, bool mirrored) : base("sprites/collectibles/powerups/fire_bullet.png", 4, 1, 4)
+        public FireBullet(float speed, int damage, bool mirrored) : base("sprites/collectibles/powerups/fire_bullet.png", 4, 1, 4)
         {
             collider.isTrigger = true;
             
@@ -74,37 +77,63 @@ namespace GXPEngine
             if (mirrored)
             {
                 Mirror(true, false);
-                SetXY(_myGame.player.x - bulletOffset - _myGame.player.width, _myGame.player.y);
+                SetXY(_myGame.player.x - bulletOffset - _myGame.player.width, _myGame.player.y + 10);
                 this.speed = -speed;
             }
             else
             {
                 this.speed = speed;
-                SetXY(_myGame.player.x + _myGame.player.width + bulletOffset, _myGame.player.y);
+                SetXY(_myGame.player.x + _myGame.player.width + bulletOffset, _myGame.player.y + 10);
 
             } 
         }
 
         public override void Update()
         {
-            _collision = MoveUntilCollision(speed, 0);
+            _collision = MoveUntilCollision(speed * Time.deltaTime, 0, true);
+            
+            
             AnimateFixed();
-
+            
             if (_collision != null)
             {
                 if (_collision.other != _myGame.player)
                 {
+                    
                     _collision.other.Damage(attackDamage);
                 }
                 Kill();
             }
-            
-            
+ 
+            foreach (GameObject gameObject in GetCollisions())
+            {
+                if (gameObject is Enemy)
+                {
+                    gameObject.Damage(attackDamage);
+                    Explode();
+
+                    break;
+                }
+            }
+
 
             if (DistanceTo(_myGame.player) > _myGame.width)
             {
                 Kill();
             }
         }
+
+        private void Explode()
+        {
+            this.alpha = 0;
+
+            _particleGenerator = new ParticleGenerator(Color.DarkOrange, 100);
+            
+
+
+
+        }
+        
+        
     }
 }
