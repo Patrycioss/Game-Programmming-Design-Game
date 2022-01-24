@@ -112,30 +112,16 @@ namespace GXPEngine
                 if (gameObject is Enemy)
                 {
                     gameObject.Damage(attackDamage);
-                    Explode();
+                    Kill();
 
                     break;
                 }
             }
-
 
             if (DistanceTo(_myGame.player) > _myGame.width)
             {
                 Kill();
             }
         }
-
-        private void Explode()
-        {
-            this.alpha = 0;
-
-            _particleGenerator = new ParticleGenerator(Color.DarkOrange, 100);
-            
-
-            Kill();
-
-        }
-        
-        
     }
 }

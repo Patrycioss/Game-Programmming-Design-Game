@@ -6,7 +6,7 @@ namespace GXPEngine.Enemies
 {
     public class Basic : Enemy
     {
-        
+        //Base class for basic enemy ai (move until it hits something then turns around)
         public Basic(string filePath, int columns, int rows, int frames) : base(filePath, columns, rows, frames)
         {
             collider.isTrigger = true;
@@ -14,29 +14,16 @@ namespace GXPEngine.Enemies
 
         public override void Update()
         {
-            _hCollision = MoveUntilCollision(speed * Time.deltaTime,0);
-
-            if (HitTest(_myGame.player))
-            {
-                _myGame.player.Damage(attackDamage);
-            }
+            collision = MoveUntilCollision(speed * Time.deltaTime,0);
             
-
-            if (_hCollision != null)
+            if (collision != null)
             {
-                if (_hCollision.other == _myGame.player)
+                speed = -speed;
+                if (speed < 0)
                 {
-                    _myGame.player.Damage(attackDamage);
+                    Mirror(true,false);
                 }
-                else
-                {
-                    speed = -speed;
-                    if (speed < 0)
-                    {
-                        Mirror(true,false);
-                    }
-                    else Mirror(false,false);
-                } 
+                else Mirror(false,false);
             } 
             
             Animate();
@@ -45,7 +32,6 @@ namespace GXPEngine.Enemies
 
         public override void Kill()
         {
-            ParticleGenerator deathParticle = new ParticleGenerator(Color.LimeGreen, 1000);
             LateDestroy();
         }
         

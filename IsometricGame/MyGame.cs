@@ -17,14 +17,14 @@ public class MyGame : Game
 	public Menu menu;
 	public Hud hud;
 
-	private int scrollBoundary;
+	//From what x does the screen start scrolling
+	private int scrollX;
 	
 	public MyGame() : base(1900, 1080, true, true, -1, -1, true)
 	{
-		scrollBoundary = width / 2;
+		scrollX = width / 2;
 		
 		//Initialzing
-		// player = new Player();
 		menu = new Menu();
 		player = new Player();
 		hud = new Hud();
@@ -41,19 +41,25 @@ public class MyGame : Game
 	{
 		Scroll();
 
+		
+		//DEBUG
+	
+		//Kills the player
 		if (Input.GetKey(Key.K))
 		{
 			player.Damage(3);
 		}
-
+		
+		//Damages the player for 1 hp
 		if (Input.GetKey((Key.J)))
 		{
 			player.Damage(1);
 		}
-
+		
+		//Toggle player hitbox
 		if (Input.GetKey(Key.H))
 		{
-			
+			player.ToggleHitBox();
 		}
 		
 	}
@@ -62,22 +68,25 @@ public class MyGame : Game
 	{
 		if (player != null && StageLoader.currentStage != null)
 		{
-			if (player.x + StageLoader.currentStage.x < scrollBoundary)
+			
+			//If the player is to the left of the center of the screen it will move to the left with the player until it hits the start of the stage
+			if (player.x + StageLoader.currentStage.x < scrollX)
 			{
-				StageLoader.currentStage.x = scrollBoundary - player.x;
+				StageLoader.currentStage.x = scrollX - player.x;
 			}
-			else if (player.x + StageLoader.currentStage.x > width - scrollBoundary)
+			else if (player.x + StageLoader.currentStage.x > width - scrollX)
 			{
-				StageLoader.currentStage.x = width - scrollBoundary - player.x;
+				StageLoader.currentStage.x = width - scrollX - player.x;
 			}
 		
+			//If the player is to the right of the center of the screen it will move to the right with the player until it hits the end of the stage
 			if (StageLoader.currentStage.x > 0)
 			{
 				StageLoader.currentStage.x = 0;
 			}
 			else if (StageLoader.currentStage.x < -StageLoader.currentStage.stageWidth + game.width)
 			{
-				StageLoader.currentStage.x = -StageLoader.currentStage.stageHeight + game.width;
+				StageLoader.currentStage.x = -StageLoader.currentStage.stageWidth + game.width;
 			}
 		}
 	}

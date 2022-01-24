@@ -2,18 +2,22 @@
 {
     public class Entity : AnimationSprite
     {
+        //Base class of all entities
+        
+        //A variable that can be edited in all subclasses to ensure the animationspeed is fitting for the entity
         protected int delayConstant;
+       
+        //Stats
         public int maxHealth;
         public float speed;
+        
 
-        public Sound deathSound;
-        public Sound moveSound;
-        public Sound attackSound;
-
-        public Entity(string filePath, int columns, int rows, int frames) : base(filePath, columns, rows, frames, true, true)
+        public Entity(string filePath, int columns, int rows, int frames, bool addCollider = true) : base(filePath, columns, rows, frames, true, addCollider)
         {
+            //This delayconstant is used by most enities
             delayConstant = 120;
             
+            //Calculates the amount of animationdelay needed based on the constant and the delta time
             if (Time.deltaTime > 1)
             {
                 _animationDelay = (byte)(delayConstant / Time.deltaTime);
@@ -27,6 +31,8 @@
 
         public override void Damage(int amount)
         {
+            //All entities can receive damage, this class also exists empty in GameObject so we can acccess this function when we use Hittest()
+            
             health -= amount;
 
             if (health <= 0)

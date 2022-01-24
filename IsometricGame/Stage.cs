@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.InteropServices;
 using System.Runtime.Remoting.Channels;
@@ -242,6 +243,25 @@ namespace GXPEngine
         public void AddObjectAtLayer(GameObject gameObject, int layer)
         {
             layers[layer].AddChild(gameObject);
+        }
+
+        public List<GameObject> GetObjects(bool includeBackground = false, bool includeMiddleGround = true, bool includeForeGround = true)
+        {
+            List<GameObject> list = new List<GameObject>();
+
+            if (includeBackground)
+            {
+                list.AddRange(layers[0].GetChildren());
+            }
+            if (includeMiddleGround)
+            {
+                list.AddRange(layers[2].GetChildren());
+            }
+            if (includeForeGround)
+            {
+                list.AddRange(layers[1].GetChildren());
+            }
+            return list;
         }
     }
 }

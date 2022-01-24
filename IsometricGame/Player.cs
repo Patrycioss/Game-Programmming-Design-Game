@@ -22,13 +22,13 @@ namespace GXPEngine
 
         public Vector2 velocity;
         
-        
         public Vector2 center;
 
         private bool wasGrounded;
         private bool isGrounded;
-
-
+        
+        private AnimationSprite sprite;
+        
         public bool mirrored;
 
         public Powerup currentPowerup;
@@ -43,8 +43,7 @@ namespace GXPEngine
         private float baseSpeed;
         private float runSpeed;
         private float movementSpeed;
-        
-        protected Collision _collision;
+
 
 
         //JUMP
@@ -53,15 +52,22 @@ namespace GXPEngine
         public Timer immunityTimer;
         public int immunityDuration;
 
-        public Player() : base("sprites/player/player.png", 3, 1, 3)
+        public Player() : base("sprites/player/hitbox.png", 1, 1, 1, true)
         {
-            //Positional info
-            // x = startX;
-            // y = startY;
-            center = new Vector2(x + width / 2, y + height / 2);
-
             collider.isTrigger = true;
-
+            alpha = 0;
+            
+            //Make the player model
+            sprite = new AnimationSprite("sprites/player/player.png", 3, 1 , 3, true, false);
+            sprite.alpha = 1;
+            sprite.width = 50;
+            sprite.height = 50;
+            AddChild(sprite);
+            
+            
+            //Positional info
+            center = new Vector2(x + width / 2, y + height / 2);
+            
             //Stats
             attackDamage = 1;
             health = 3;
@@ -85,16 +91,10 @@ namespace GXPEngine
             gravitationalForce = 0.005f;
 
             //Animation
-            SetCycle(0, 2,switchFrame:true);
-            //
-            // Sprite sprite = new Sprite("sprites/player/player_hitbox.png");
-            // sprite.alpha = 100;
-            // AddChild(sprite);
-            // _collider = new BoxCollider(sprite);
+            sprite.SetCycle(0, 2, _animationDelay, true);
+            
+   
         }
-
-        
-        
 
         void UpdateInformation()
         {
@@ -107,25 +107,39 @@ namespace GXPEngine
             }
             else mirrored = false;
         }
-
-
+        
         public override void Update()
         {
             UpdateInformation();
             CheckIfGrounded();
-            Animate();
+            CheckForDamage();
             
+            //Animate sprite and mirror when hitbox is mirrored
+            sprite.Animate();
+
+            if (mirrored)
+            {
+                sprite.Mirror(true,false);
+                sprite.x = -10;
+            }
+            else
+            {
+                sprite.Mirror(false,false); 
+                sprite.x = -2;
+            }
+            
+
             //Immunityframe
             if (immunityTimer != null)
             {
                 if (!immunityTimer.finished)
                 {
-                    alpha = Utils.Random(0.4f, 1);
+                    sprite.alpha = Utils.Random(0.4f, 1);
                     movementSpeed = runSpeed;
                 }
                 else
                 {
-                    alpha = 1;
+                    sprite.alpha = 1;
                     movementSpeed = baseSpeed;
 
                     if (collider.isTrigger)
@@ -155,7 +169,7 @@ namespace GXPEngine
                 {
                     case State.Stand:
 
-                        SetCycle(0,1,switchFrame: true);
+                        sprite.SetCycle(0,1,switchFrame: true);
                         
                         velocity.Set(0, 0);
                         
@@ -182,7 +196,7 @@ namespace GXPEngine
 
                     case State.Walk:
                         
-                        SetCycle(0,2,switchFrame: true);
+                        sprite.SetCycle(0,2,switchFrame: true);
 
                         
                         if (Input.GetKey(Key.A) == Input.GetKey(Key.D))
@@ -263,14 +277,14 @@ namespace GXPEngine
             Jump
         }
 
-        void Jump()
+        private void Jump()
         {
             //TODO: Jump sound
             velocity.y -= jumpForce;
         }
-
+        
         public void CheckIfGrounded()
-       {
+        {
            if (verticalCollision != null)
            {
                if (verticalCollision.other.y > y)
@@ -280,11 +294,13 @@ namespace GXPEngine
                else velocity.y = 0;
            }
             else isGrounded = false;
-       }
+        }
+        
         public override void Damage(int amount)
         {
             if (amount > 0)
             {
+                //If the player has immunityframes they can't be damaged
                 if (immunityTimer == null || immunityTimer.finished)
                 {
                     health -= amount;
@@ -307,12 +323,14 @@ namespace GXPEngine
 
         public override void Kill()
         {
+            //Loads up the main menu and removes the hud
             _myGame.AddChild(_myGame.menu);
             _myGame.RemoveChild(_myGame.hud);
             StageLoader.ClearStage();
             
             Reset();
 
+            //Also resets the hud for next use
             _myGame.hud = new Hud();
         }
 
@@ -322,11 +340,42 @@ namespace GXPEngine
             _myGame.hud.AddHealth(amount);
         }
 
+        //Resets the player to maxhealth, puts them facing to the right and removes powerups
         public void Reset()
         {
             health = maxHealth;
             currentPowerup = null;
             Mirror(false,false);
         }
+
+        public void ToggleHitBox()
+        {
+            if (alpha == 0)
+            {
+                alpha = 1;
+            }
+            else alpha = 0;
+        }
+        
+
+        private void CheckForDamage()
+        {
+            foreach (GameObject gameObject in StageLoader.currentStage.GetObjects())
+            {
+                Console.WriteLine(gameObject.name);
+                if (gameObject is Entity)
+                {
+                    if (DistanceTo(gameObject) < 100)
+                    {
+                        if (HitTest(gameObject) && !(Equals(gameObject)))
+                        {
+                            Damage(gameObject.attackDamage);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        
     }
 }

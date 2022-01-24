@@ -7,14 +7,15 @@ namespace GXPEngine.Enemies
 {
     public class Enemy : Entity
     {
-        protected Collision _hCollision;
-        protected Collision _vCollision;
+        //Base class for all Enemies, used to only check for enemy objects for the player to get damage from
+        
+        protected Collision collision;
+
         public Enemy(string filePath, int columns, int rows, int frames) : base(filePath, columns, rows, frames)
         {
             collider.isTrigger = false;
-            Console.WriteLine(1);
         }
 
-       public override void Update(){}
+        public override void Update(){}
     }
 }
