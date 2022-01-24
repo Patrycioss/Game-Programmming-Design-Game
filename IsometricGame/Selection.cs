@@ -53,10 +53,9 @@ namespace GXPEngine
 
         void Press()
         {
-
-            _myGame.StageCreator.SetStage(targetStage);
             _myGame.RemoveChild(_myGame.menu);
-            _myGame.AddChild(_myGame.StageLoader.stageContainer);
+            StageLoader.LoadStage(targetStage);
+            _myGame.hud = new Hud();
             _myGame.AddChild(_myGame.hud);
             
         }

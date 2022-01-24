@@ -15,7 +15,6 @@ namespace GXPEngine
 
             collider.isTrigger = true;
 
-            destination = new Vector2(_myGame.startPosition.x, _myGame.startPosition.y);
         }
 
         public void SetPlayerDestination(float x, float y)
@@ -27,10 +26,14 @@ namespace GXPEngine
         {
             if (HitTest(_myGame.player))
             {
-                _myGame.StageLoader.Clear();
+                
                 _myGame.RemoveChild(_myGame.hud);
                 
                 _myGame.player.Reset();
+
+                StageLoader.ClearStage();
+                    
+                
                 _myGame.hud = new Hud();
                 
                _myGame.AddChild(_myGame.menu);

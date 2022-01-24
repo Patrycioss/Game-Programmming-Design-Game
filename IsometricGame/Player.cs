@@ -91,9 +91,6 @@ namespace GXPEngine
             // sprite.alpha = 100;
             // AddChild(sprite);
             // _collider = new BoxCollider(sprite);
-            
-            
-
         }
 
         
@@ -138,7 +135,7 @@ namespace GXPEngine
                     }
                 }
             }
-            
+
             //PowerMove
             if (Input.GetKey(Key.F) && currentPowerup != null)
             {
@@ -212,7 +209,6 @@ namespace GXPEngine
                             break;
 
                         }
-                        //Coyote time by also having wasGrounded to be false
                         else if (!isGrounded && !wasGrounded)
                         {
                             currentState = State.Jump;
@@ -312,9 +308,9 @@ namespace GXPEngine
         public override void Kill()
         {
             _myGame.AddChild(_myGame.menu);
-            _myGame.RemoveChild(_myGame.StageLoader);
             _myGame.RemoveChild(_myGame.hud);
-            _myGame.StageLoader.Clear();
+            StageLoader.ClearStage();
+            
             Reset();
 
             _myGame.hud = new Hud();

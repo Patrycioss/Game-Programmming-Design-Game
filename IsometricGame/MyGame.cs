@@ -12,44 +12,27 @@ using GXPEngine.Core;
 
 public class MyGame : Game
 {
-	public StageCreator StageCreator;
-	public StageLoader StageLoader;
 	public Background currentBackground;
 	public Player player;
 	public Menu menu;
 	public Hud hud;
 
 	private int scrollBoundary;
-
 	
-	
-	public Vector2 startPosition;
-	
-	public MyGame() : base(1900, 1080, false, true, -1, -1, true)
+	public MyGame() : base(1900, 1080, true, true, -1, -1, true)
 	{
 		scrollBoundary = width / 2;
 		
 		//Initialzing
-		StageLoader = new StageLoader();
-		StageCreator = new StageCreator();
-
+		// player = new Player();
+		menu = new Menu();
 		player = new Player();
 		hud = new Hud();
 
-		menu = new Menu();
-		
-		
-		//Temp solution for animations		
-		// targetFps = 5;
-		
 		//Background	
 		currentBackground = new Background("backgrounds/standard.png");
-		
-		//Standard startposition of player in a stage
-		startPosition = new Vector2(150, 800);
-		
-		AddChild(currentBackground);
 
+		AddChild(currentBackground);
 		AddChild(menu);
 
 	}
@@ -57,8 +40,6 @@ public class MyGame : Game
 	void Update()
 	{
 		Scroll();
-
-
 
 		if (Input.GetKey(Key.K))
 		{
@@ -79,30 +60,26 @@ public class MyGame : Game
 
 	void Scroll()
 	{
-		if (player.x + StageLoader.stageContainer.x < scrollBoundary)
+		if (player != null && StageLoader.currentStage != null)
 		{
-			StageLoader.stageContainer.x = scrollBoundary - player.x;
+			if (player.x + StageLoader.currentStage.x < scrollBoundary)
+			{
+				StageLoader.currentStage.x = scrollBoundary - player.x;
+			}
+			else if (player.x + StageLoader.currentStage.x > width - scrollBoundary)
+			{
+				StageLoader.currentStage.x = width - scrollBoundary - player.x;
+			}
+		
+			if (StageLoader.currentStage.x > 0)
+			{
+				StageLoader.currentStage.x = 0;
+			}
+			else if (StageLoader.currentStage.x < -StageLoader.currentStage.stageWidth + game.width)
+			{
+				StageLoader.currentStage.x = -StageLoader.currentStage.stageHeight + game.width;
+			}
 		}
-		else if (player.x + StageLoader.stageContainer.x > width - scrollBoundary)
-		{
-			StageLoader.stageContainer.x = width - scrollBoundary - player.x;
-		}
-		
-		if (StageLoader.stageContainer.x > 0)
-		{
-			StageLoader.stageContainer.x = 0;
-		}
-
-		
-		
-		
-		else if (StageLoader.stageContainer.x < -StageLoader.mapWidth + game.width)
-		{
-			StageLoader.stageContainer.x = -StageLoader.mapWidth + game.width;
-		}
-
-
-		
 	}
 	
 	static void Main()							// Main() is the first method that's called when the program is run

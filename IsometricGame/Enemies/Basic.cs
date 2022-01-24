@@ -9,8 +9,6 @@ namespace GXPEngine.Enemies
         
         public Basic(string filePath, int columns, int rows, int frames) : base(filePath, columns, rows, frames)
         {
-            SetCycle(0,2, animationDelay: Byte.MaxValue);
-
             collider.isTrigger = true;
         }
 
@@ -41,7 +39,7 @@ namespace GXPEngine.Enemies
                 } 
             } 
             
-            AnimateFixed();
+            Animate();
 
         }
 

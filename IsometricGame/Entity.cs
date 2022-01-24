@@ -2,6 +2,7 @@
 {
     public class Entity : AnimationSprite
     {
+        protected int delayConstant;
         public int maxHealth;
         public float speed;
 
@@ -11,7 +12,14 @@
 
         public Entity(string filePath, int columns, int rows, int frames) : base(filePath, columns, rows, frames, true, true)
         {
-            _animationDelay = 40;
+            delayConstant = 120;
+            
+            if (Time.deltaTime > 1)
+            {
+                _animationDelay = (byte)(delayConstant / Time.deltaTime);
+            }
+            else _animationDelay = 40; 
+            
         }
 
         public virtual void Update(){}

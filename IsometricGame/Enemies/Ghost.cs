@@ -16,11 +16,11 @@ namespace GXPEngine.Enemies
         
         public Ghost(string filePath, int columns, int rows, int frames) : base(filePath, columns, rows, frames)
         {
-            SetCycle(0, 2, animationDelay: Byte.MaxValue);
-
+            Console.WriteLine(2);
+            SetCycle(0,2,255);
+            
             position = new Vector2(x, y);
             desiredPosition = new Vector2(_myGame.player.x, _myGame.player.y);
-            
         }
 
         public override void Update()
@@ -67,7 +67,7 @@ namespace GXPEngine.Enemies
             }
 
 
-                AnimateFixed();
+            Animate();
         }
     }
 

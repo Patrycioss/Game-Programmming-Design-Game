@@ -14,6 +14,8 @@ namespace GXPEngine
         protected Timer useTimer;
         public Powerup(string filePath, int columns, int rows, int frames) : base(filePath, columns, rows, frames)
         {
+            SetCycle(0,4,7);
+            
         }
 
         protected override void Action()
@@ -51,7 +53,6 @@ namespace GXPEngine
                 useTimer = new Timer(coolDown);
                 
                 _fireBullet = new FireBullet(speed, damage,_myGame.player.mirrored);
-                _myGame.StageLoader.stageContainer.AddChild(_fireBullet);
             }
         }
         
@@ -67,10 +68,12 @@ namespace GXPEngine
         
         public FireBullet(float speed, int damage, bool mirrored) : base("sprites/collectibles/powerups/fire_bullet.png", 4, 1, 4)
         {
+            StageLoader.AddObjectAtLayer(this,1);
+            
             collider.isTrigger = true;
             
             SetScaleXY(2);
-
+            
             bulletOffset = 5;
             attackDamage = damage;
             
@@ -85,15 +88,14 @@ namespace GXPEngine
                 this.speed = speed;
                 SetXY(_myGame.player.x + _myGame.player.width + bulletOffset, _myGame.player.y + 10);
 
-            } 
+            }
         }
 
         public override void Update()
         {
             _collision = MoveUntilCollision(speed * Time.deltaTime, 0, true);
             
-            
-            AnimateFixed();
+            Animate();            
             
             if (_collision != null)
             {
@@ -130,7 +132,7 @@ namespace GXPEngine
             _particleGenerator = new ParticleGenerator(Color.DarkOrange, 100);
             
 
-
+            Kill();
 
         }
         
