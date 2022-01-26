@@ -15,7 +15,7 @@ namespace GXPEngine.SpecialObjects.Collectibles
 
         protected override void Action()
         {
-            _myGame.player.currentPowerup = this;
+            myGame.player.currentPowerup = this;
         }
 
         public virtual void Use()
@@ -33,7 +33,7 @@ namespace GXPEngine.SpecialObjects.Collectibles
         
         public FireBulletShooter() : base("sprites/collectibles/powerups/fire_pickup_big.png", 4, 1, 4)
         {
-            SetXY(_myGame.player.x,_myGame.player.y);
+            SetXY(myGame.player.x,myGame.player.y);
             visible = true;
 
             speed = 1f;
@@ -47,7 +47,7 @@ namespace GXPEngine.SpecialObjects.Collectibles
             {
                 useTimer = new Timer(coolDown);
 
-                StageLoader.AddObjectAtLayer(new FireBullet(speed, damage, _myGame.player.mirrored),1);
+                StageLoader.AddObjectAtLayer(new FireBullet(speed, damage, myGame.player.mirrored),1);
             }
         }
     }

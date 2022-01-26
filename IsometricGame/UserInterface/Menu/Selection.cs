@@ -51,10 +51,10 @@ namespace GXPEngine.UserInterface.Menu
 
         void Press()
         {
-            _myGame.RemoveChild(_myGame.menu);
+            myGame.RemoveChild(myGame.menu);
             StageLoader.LoadStage(targetStage);
-            _myGame.hud = new Hud();
-            _myGame.AddChild(_myGame.hud);
+            myGame.hud = new Hud();
+            myGame.AddChild(myGame.hud);
             
         }
 

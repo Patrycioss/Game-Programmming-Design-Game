@@ -18,7 +18,7 @@ namespace GXPEngine.UserInterface
         public Hud()
         {
             //Initializing variables
-            canvas = new EasyDraw(_myGame.width, _myGame.height, false);
+            canvas = new EasyDraw(myGame.width, myGame.height, false);
             TiledLoader tiledLoader = new TiledLoader("tiled/hud.tmx", canvas, false);
 
             //Monetary Gains
@@ -26,7 +26,7 @@ namespace GXPEngine.UserInterface
             coinAmountPos = new Vector2(1000,1000);
             
             //HP
-            hearts = new Sprite[_myGame.player.maxHealth];
+            hearts = new Sprite[myGame.player.maxHealth];
             healthBarOrigin = new Vector2(-1000, -1000);
             
             //Place to add extra exceptions
@@ -54,7 +54,7 @@ namespace GXPEngine.UserInterface
         public void Reset()
         {
             coinAmount = 0;
-            hearts = new Sprite[_myGame.player.maxHealth];
+            hearts = new Sprite[myGame.player.maxHealth];
 
             UpdateCanvas();
         }
@@ -114,20 +114,20 @@ namespace GXPEngine.UserInterface
         public void FixHearts()
         {
             //Resetting health in HUD
-            if (_myGame.player.health != hearts.Length)
+            if (myGame.player.health != hearts.Length)
             {
-                if (_myGame.player.health < hearts.Length)
+                if (myGame.player.health < hearts.Length)
                 {
-                    for (int i = 0; i < Mathf.Abs(_myGame.player.health - hearts.Length); i++)
+                    for (int i = 0; i < Mathf.Abs(myGame.player.health - hearts.Length); i++)
                     {
-                        _myGame.hud.RemoveHeart();
+                        myGame.hud.RemoveHeart();
                     }
                 }
                 else
                 {
-                    for (int i = 0; i < Mathf.Abs(_myGame.player.health - hearts.Length); i++)
+                    for (int i = 0; i < Mathf.Abs(myGame.player.health - hearts.Length); i++)
                     {
-                        _myGame.hud.AddHeart();
+                        myGame.hud.AddHeart();
                     }
                 }
             }    

@@ -11,7 +11,7 @@ namespace GXPEngine.UserInterface.Menu
         public Menu()
         {
             //Initializing
-            _myGame.ShowMouse(true);
+            myGame.ShowMouse(true);
 
             selections.Add(Stages.Tutorial,new Selection(Stages.Tutorial, false, 9));
             selections.Add(Stages.Stage1,new Selection(Stages.Stage1, true, 0));

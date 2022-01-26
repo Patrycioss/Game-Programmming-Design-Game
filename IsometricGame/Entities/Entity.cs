@@ -25,6 +25,9 @@
         public virtual void Update(){}
 
 
+        /// <summary>
+        /// Damages this entity for a certain amount of its health
+        /// </summary>
         public override void Damage(int amount)
         {
             //All entities can receive damage, this class also exists empty in GameObject so we can access this function when we use Hittest()
@@ -37,12 +40,18 @@
             }
         }
 
+        /// <summary>
+        /// Adds a certain amount of health to this entity's healthpool
+        /// </summary>
         public override void AddHealth(int amount)
         {
             health += amount;
             if (health > maxHealth) health = maxHealth;
         }
 
+        /// <summary>
+        /// Kills this entity
+        /// </summary>
         public override void Kill()
         {
             LateDestroy();

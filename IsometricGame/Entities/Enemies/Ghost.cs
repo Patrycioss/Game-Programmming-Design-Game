@@ -16,14 +16,14 @@ namespace GXPEngine.Entities.Enemies
         {
             SetCycle(0,2);
             position = new Vector2(x, y);
-            desiredPosition = new Vector2(_myGame.player.x, _myGame.player.y);
+            desiredPosition = new Vector2(myGame.player.x, myGame.player.y);
         }
 
         public override void Update()
         {
             //Update positional info
             position.Set(x, y);
-            desiredPosition.Set(_myGame.player.x, _myGame.player.y);
+            desiredPosition.Set(myGame.player.x, myGame.player.y);
 
             //Calculate direction
             direction = Mathf.Subtract(desiredPosition, position);

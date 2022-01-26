@@ -28,7 +28,7 @@ namespace GXPEngine.StageManagement
                 layers[i] = new Pivot();
             }
             
-            _myGame.AddChild(this);
+            myGame.AddChild(this);
             
             stageData = MapParser.ReadMap(stagePath);
             tileSize = stageData.TileWidth;
@@ -61,9 +61,9 @@ namespace GXPEngine.StageManagement
                 {
                 //Entities
                     case 210:
-                        _myGame.player = new Player();
-                        _myGame.player.SetXY(col*tileSize, row*tileSize);
-                        layers[1].AddChild(_myGame.player);
+                        myGame.player = new Player();
+                        myGame.player.SetXY(col*tileSize, row*tileSize);
+                        layers[1].AddChild(myGame.player);
                         break;
                     
                     case 122:

@@ -20,13 +20,13 @@ namespace GXPEngine.Entities
             if (mirrored)
             {
                 Mirror(true, false);
-                SetXY(_myGame.player.x - 2.5f * bulletOffset - _myGame.player.width, _myGame.player.y + 10);
+                SetXY(myGame.player.x - 2.5f * bulletOffset - myGame.player.width, myGame.player.y + 10);
                 this.speed = -speed;
             }
             else
             {
                 this.speed = speed;
-                SetXY(_myGame.player.x + _myGame.player.width + bulletOffset, _myGame.player.y + 10);
+                SetXY(myGame.player.x + myGame.player.width + bulletOffset, myGame.player.y + 10);
             }
         }
 
@@ -38,7 +38,7 @@ namespace GXPEngine.Entities
 
             if (collision != null)
             {
-                if (collision.other != _myGame.player)
+                if (collision.other != myGame.player)
                 {
                     collision.other.Damage(attackDamage);
                 }
@@ -57,7 +57,7 @@ namespace GXPEngine.Entities
                 }
             }
 
-            if (DistanceTo(_myGame.player) > _myGame.width)
+            if (DistanceTo(myGame.player) > myGame.width)
             {
                 Kill();
             }

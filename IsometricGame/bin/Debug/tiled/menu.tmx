@@ -53,8 +53,8 @@
  </layer>
  <objectgroup id="2" name="Decoration"/>
  <objectgroup id="3" name="Selection">
-  <object id="16" x="768" y="192" width="465.382" height="73.626">
-   <text pixelsize="64" wrap="1">Game Title</text>
+  <object id="16" x="686" y="194" width="587.382" height="73.626">
+   <text pixelsize="64" wrap="1">Super Mario Ripoff</text>
   </object>
   <object id="17" type="Tutorial" x="768" y="320" width="384" height="64">
    <properties>

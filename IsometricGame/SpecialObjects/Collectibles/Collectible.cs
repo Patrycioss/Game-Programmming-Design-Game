@@ -11,7 +11,7 @@
 
         protected void Update()
         {
-            if (DistanceTo(_myGame.player) < 32)
+            if (DistanceTo(myGame.player) < 32)
             {
                 Action();
                 this.Destroy();
@@ -32,7 +32,7 @@
         
         protected override void Action()
         {
-            _myGame.hud.AddCoinAmount(1);
+            myGame.hud.AddCoinAmount(1);
             sound.Play(volume:0.3f);
         }
     }
@@ -50,7 +50,7 @@
         {
             sound.Play(volume:2.0f);
             
-            _myGame.player.AddHealth(1);
+            myGame.player.AddHealth(1);
         }
     }
    

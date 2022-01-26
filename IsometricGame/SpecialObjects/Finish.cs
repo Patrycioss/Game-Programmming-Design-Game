@@ -12,7 +12,7 @@ namespace GXPEngine.SpecialObjects
             this.x = x;
             this.y = y;
             
-            _myGame = (MyGame) game;
+            myGame = (MyGame) game;
 
             collider.isTrigger = true;
 
@@ -25,19 +25,19 @@ namespace GXPEngine.SpecialObjects
 
         void Update()
         {
-            if (HitTest(_myGame.player))
+            if (HitTest(myGame.player))
             {
                 
-                _myGame.RemoveChild(_myGame.hud);
+                myGame.RemoveChild(myGame.hud);
                 
-                _myGame.player.Reset();
+                myGame.player.Reset();
 
                 StageLoader.ClearStage();
                     
                 
-                _myGame.hud = new Hud();
+                myGame.hud = new Hud();
                 
-               _myGame.AddChild(_myGame.menu);
+               myGame.AddChild(myGame.menu);
             }
         }
     }

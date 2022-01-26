@@ -21,7 +21,7 @@ namespace GXPEngine.SpecialObjects
 
         void Update()
         {
-            canvas.visible = (HitTest(_myGame.player));
+            canvas.visible = (HitTest(myGame.player));
         }
     }
 }

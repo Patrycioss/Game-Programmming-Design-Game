@@ -24,10 +24,21 @@ namespace GXPEngine
 
 		
 		//SELF-ADDED
-		protected MyGame _myGame;
+		protected MyGame myGame;
 		
+		/// <summary>
+		/// This function exists here solely to allow it to be used with Hittest() information
+		/// </summary>
 		public virtual void Damage(int amount) {}
+		
+		/// <summary>
+		/// This function exists here solely to allow it to be used with Hittest() information
+		/// </summary>
 		public virtual void AddHealth(int amount) {}
+		
+		/// <summary>
+		/// This function exists here solely to allow it to be used with Hittest() information
+		/// </summary>
 		public virtual void Kill() {}
 
 
@@ -47,7 +58,7 @@ namespace GXPEngine
 		/// </param> 
 		public GameObject(bool addCollider=false)
 		{
-			_myGame = (MyGame) game;
+			myGame = (MyGame) game;
 			
 			if (addCollider) {
 				_collider = createCollider ();
