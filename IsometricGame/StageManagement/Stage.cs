@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using GXPEngine.Entities;
 using GXPEngine.Entities.Enemies;
+using GXPEngine.SpecialObjects;
 using GXPEngine.SpecialObjects.Collectibles;
 using TiledMapParser;
 
 namespace GXPEngine.StageManagement
 {
+    /// <summary>
+    /// The stage class contains all information about a stage
+    /// </summary>
     public class Stage : GameObject
     {
 
@@ -16,12 +20,18 @@ namespace GXPEngine.StageManagement
         
         public int stageHeight;
         public int stageWidth;
+
+        public readonly Stages stage;
         
+        //Use this to group all tiles without collision together
         private SpriteBatch spriteBatch;
 
-        public Stage(string stagePath)
+        public Stage(Stages stage)
         {
-            layers = new Pivot[3];
+            //All the layers, add tiled manually to the layers
+            layers = new Pivot[2];
+            //Layer[0]: background (tutorial information, walls)
+            //Layer[1]: foreground (player,enemies)
 
             for (int i = 0; i < layers.Length; i++)
             {
@@ -29,7 +39,9 @@ namespace GXPEngine.StageManagement
             }
             
             myGame.AddChild(this);
-            
+
+            this.stage = stage;
+            string stagePath = "tiled/stages/" + stage.ToString() + ".tmx";
             stageData = MapParser.ReadMap(stagePath);
             tileSize = stageData.TileWidth;
             
@@ -134,7 +146,7 @@ namespace GXPEngine.StageManagement
                         AddChild(crate);
                         break;
                     
-                    case 134:
+                    case 3:
                         Sprite metal = new Sprite("sprites/tiles/metal.png");
                         metal.SetXY(col*tileSize,row*tileSize);
                         AddChild(metal);
@@ -150,6 +162,23 @@ namespace GXPEngine.StageManagement
                         Sprite blueGrey = new Sprite("sprites/tiles/blue_grey.png");
                         blueGrey.SetXY(col*tileSize,row*tileSize);
                         AddChild(blueGrey);
+                        break;
+
+                case 74:
+                    Finish finish = new Finish("sprites/tiles/finish.png");
+                    finish.SetXY(col * tileSize, row * tileSize);
+                    switch (stage)
+                    {
+                        case Stages.Tutorial:
+                            finish.SetNextStage(Stages.Stage1);
+                            break;
+                        case Stages.Stage1:
+                            finish.SetNextStage(Stages.Stage2);
+                            break;
+                    }
+                        
+                        
+                        AddObjectAtLayer(finish,1);
                         break;
                     
                     
@@ -210,45 +239,45 @@ namespace GXPEngine.StageManagement
             spriteBatch.Freeze();
             layers[0].AddChild(spriteBatch);
             
-            
-            
             //Setup barriers
             Sprite barrier = new Sprite("sprites/tiles/checkers.png");
             barrier.SetXY(-20,0);
             barrier.width = 20;
             barrier.height = stageHeight;
-            AddChild(barrier);
+            AddObjectAtLayer(barrier,1);
 
             barrier = new Sprite("sprites/tiles/checkers.png");
             barrier.SetXY(stageWidth,0);
             barrier.width = 20;
             barrier.height = stageHeight;
-            AddChild(barrier);
+            AddObjectAtLayer(barrier,1);
 
 
             foreach (Pivot pivot in layers)
             {
                 AddChild(pivot);
             }
-            
         }
 
+        /// <summary>
+        /// Adds an object at the specified layer.
+        /// [0]: background; [1]: foreground;
+        /// </summary>
         public void AddObjectAtLayer(GameObject gameObject, int layer)
         {
             layers[layer].AddChild(gameObject);
         }
 
-        public List<GameObject> GetObjects(bool includeBackground = false, bool includeMiddleGround = true, bool includeForeGround = true)
+        /// <summary>
+        /// Gets a list of objects from the stage
+        /// </summary>
+        public List<GameObject> GetObjects(bool includeBackground = false, bool includeForeGround = true)
         {
             List<GameObject> list = new List<GameObject>();
 
             if (includeBackground)
             {
                 list.AddRange(layers[0].GetChildren());
-            }
-            if (includeMiddleGround)
-            {
-                list.AddRange(layers[2].GetChildren());
             }
             if (includeForeGround)
             {

@@ -2,6 +2,10 @@
 
 namespace GXPEngine.StageManagement
 {
+      
+    /// <summary>
+    /// Use this class to load in stages
+    /// </summary>
     public class StageCreator : GameObject
     {
         public void SetStage(Enum stage)
@@ -12,7 +16,7 @@ namespace GXPEngine.StageManagement
                     
                     //Load stage
                     StageLoader.LoadStage(Stages.Tutorial);
-                    
+
                     break;
                 
                 

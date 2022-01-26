@@ -1,8 +1,11 @@
 ﻿namespace GXPEngine.SpecialObjects.Collectibles
 {
+    /// <summary>
+    /// Base class for all collectible objects
+    /// </summary>
     public class Collectible : AnimationSprite
     {
-        protected Sound sound;
+        protected Sound pickupSound;
 
         protected Collectible(string filePath, int columns, int rows, int frames) : base(filePath, columns, rows, frames, true)
         {
@@ -20,35 +23,44 @@
             AnimateFixed();
         }
         
+        /// <summary>
+        /// In the action function it is specified what happens when you pick a collectible up
+        /// </summary>
         protected virtual void Action(){}
     }
 
+    /// <summary>
+    /// A class for a coin which you can collect
+    /// </summary>
     public class Coin : Collectible
     {
         public Coin() : base("Sprites/collectibles/coin/coin.png", 1, 1, 1)
         {
-            sound = new Sound("sounds/Coin.wav");
+            pickupSound = new Sound("sounds/Coin.wav");
         }
         
         protected override void Action()
         {
             myGame.hud.AddCoinAmount(1);
-            sound.Play(volume:0.3f);
+            pickupSound.Play(volume:0.3f);
         }
     }
 
+    /// <summary>
+    /// A class for a heart which you can pick up to gain health
+    /// </summary>
     public class Heart : Collectible
     {
         public Heart() : base("sprites/collectibles/heart/heart_small.png", 1, 1, 1)
         {
             collider.isTrigger = true;
 
-            sound = new Sound("heart.wav");
+            pickupSound = new Sound("heart.wav");
         }
-
+        
         protected override void Action()
         {
-            sound.Play(volume:2.0f);
+            pickupSound.Play(volume:2.0f);
             
             myGame.player.AddHealth(1);
         }

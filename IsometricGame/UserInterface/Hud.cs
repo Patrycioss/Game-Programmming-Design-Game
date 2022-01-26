@@ -7,7 +7,7 @@ namespace GXPEngine.UserInterface
     {
         private readonly EasyDraw canvas;
         
-        private int coinAmount;
+        public int coinsCollected;
         
         private Vector2 coinAmountPos;
         private Vector2 healthBarOrigin;
@@ -22,7 +22,7 @@ namespace GXPEngine.UserInterface
             TiledLoader tiledLoader = new TiledLoader("tiled/hud.tmx", canvas, false);
 
             //Monetary Gains
-            coinAmount = 0;
+            coinsCollected = 0;
             coinAmountPos = new Vector2(1000,1000);
             
             //HP
@@ -53,7 +53,7 @@ namespace GXPEngine.UserInterface
 
         public void Reset()
         {
-            coinAmount = 0;
+            coinsCollected = 0;
             hearts = new Sprite[myGame.player.maxHealth];
 
             UpdateCanvas();
@@ -84,7 +84,7 @@ namespace GXPEngine.UserInterface
 
         public void AddCoinAmount(int amount)
         {
-            coinAmount += amount;
+            coinsCollected += amount;
             UpdateCanvas();
         }
 
@@ -136,7 +136,7 @@ namespace GXPEngine.UserInterface
         private void UpdateCanvas()
         {
             canvas.ClearTransparent();
-            canvas.Text(coinAmount.ToString(),coinAmountPos.x,coinAmountPos.y);
+            canvas.Text(coinsCollected.ToString(),coinAmountPos.x,coinAmountPos.y);
         }
         
         private void AddHeart()

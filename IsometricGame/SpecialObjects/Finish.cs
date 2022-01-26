@@ -4,41 +4,40 @@ using GXPEngine.UserInterface;
 
 namespace GXPEngine.SpecialObjects
 {
+    /// <summary>
+    /// A finish object to end a stage with
+    /// </summary>
     public class Finish : Sprite
     {
-        private Vector2 destination;
-        public Finish(string imagePath, float x, float y) : base(imagePath, addCollider: true)
+        private Stages nextStage;
+        public Finish(string imagePath) : base(imagePath, addCollider: true)
         {
-            this.x = x;
-            this.y = y;
-            
-            myGame = (MyGame) game;
-
             collider.isTrigger = true;
-
-        }
-
-        public void SetPlayerDestination( float newX, float newY)
-        {
-            destination.Set(newX,newY);
         }
 
         void Update()
         {
             if (HitTest(myGame.player))
             {
+                myGame.menu.menuButtons[StageLoader.currentStage.stage].SetCoinsCollected(myGame.hud.coinsCollected);
                 
                 myGame.RemoveChild(myGame.hud);
-                
                 myGame.player.Reset();
-
                 StageLoader.ClearStage();
-                    
-                
                 myGame.hud = new Hud();
-                
-               myGame.AddChild(myGame.menu);
+                myGame.AddChild(myGame.menu);
+
+                myGame.menu.menuButtons[nextStage].Unlock();
+
             }
+        }
+
+        /// <summary>
+        /// Sets the stage that will be unlocked by the finish
+        /// </summary>
+        public void SetNextStage(Stages stage)
+        {
+            nextStage = stage;
         }
     }
 }

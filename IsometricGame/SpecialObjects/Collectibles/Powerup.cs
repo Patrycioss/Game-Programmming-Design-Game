@@ -4,6 +4,10 @@ using GXPEngine.StageManagement;
 
 namespace GXPEngine.SpecialObjects.Collectibles
 {
+      
+    /// <summary>
+    /// Class for powerups
+    /// </summary>
     public class Powerup : Collectible
     {
         protected Timer useTimer;
@@ -18,6 +22,10 @@ namespace GXPEngine.SpecialObjects.Collectibles
             myGame.player.currentPowerup = this;
         }
 
+          
+        /// <summary>
+        /// Uses the powerup
+        /// </summary>
         public virtual void Use()
         {
             
@@ -29,7 +37,6 @@ namespace GXPEngine.SpecialObjects.Collectibles
         private readonly float speed;
         private readonly int coolDown;
         private readonly int damage;
-
         
         public FireBulletShooter() : base("sprites/collectibles/powerups/fire_pickup_big.png", 4, 1, 4)
         {

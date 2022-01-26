@@ -2,6 +2,9 @@
 
 namespace GXPEngine.StageManagement
 {
+    /// <summary>
+    /// This class has all the loading functionality of stages
+    /// </summary>
     public static class StageLoader
     {
         public static Stage currentStage;
@@ -15,12 +18,16 @@ namespace GXPEngine.StageManagement
             
             
             //Add file structure text
-            string stagePath = "tiled/stages/" + stage.ToString() + ".tmx";
+          
             
             
-            currentStage = new Stage(stagePath);
+            currentStage = new Stage(stage);
         }
 
+          
+        /// <summary>
+        /// Get rid of the current stage
+        /// </summary>
         public static void ClearStage()
         {
             if (currentStage != null)
@@ -30,7 +37,12 @@ namespace GXPEngine.StageManagement
             }
             else throw new Exception("There isn't any stage at the moment to get rid of I'm afraid!");
         }
-
+        
+          
+        /// <summary>
+        /// Adds an object at the specified layer.
+        /// [0]: background; [1]: foreground;
+        /// </summary>
         public static void AddObjectAtLayer(GameObject gameObject, int layer)
         {
             currentStage.AddObjectAtLayer(gameObject,layer);

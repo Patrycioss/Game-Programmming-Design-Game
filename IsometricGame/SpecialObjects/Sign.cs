@@ -1,6 +1,9 @@
 ﻿
 namespace GXPEngine.SpecialObjects
 {
+    /// <summary>
+    /// Sign object with text when player walks over it
+    /// </summary>
     public class Sign : Sprite
     {
         private readonly EasyDraw canvas;
@@ -16,7 +19,6 @@ namespace GXPEngine.SpecialObjects
             canvas.TextSize(16);
             canvas.Text(text,0,32);
             AddChild(canvas);
-            
         }
 
         void Update()

@@ -100,7 +100,7 @@
     <Compile Include="StageManagement\Stages.cs" />
     <Compile Include="UserInterface\Hud.cs" />
     <Compile Include="UserInterface\Menu\Menu.cs" />
-    <Compile Include="UserInterface\Menu\Selection.cs" />
+    <Compile Include="UserInterface\Menu\MenuButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
