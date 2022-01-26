@@ -43,7 +43,6 @@ namespace GXPEngine.Entities
             //Visual
             collider.isTrigger = true;
             alpha = 0;
-            sprite.SetCycle(0, 2, _animationDelay);
             
                 //Make the player model
                 sprite = new AnimationSprite("sprites/player/player.png", 3, 1, 3, true, false)
@@ -53,6 +52,8 @@ namespace GXPEngine.Entities
                     height = 50
                 };
                 AddChild(sprite);
+                sprite.SetCycle(0, 2, _animationDelay);
+
 
             //Positional info
             center = new Vector2(0, 0);

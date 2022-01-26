@@ -3,6 +3,9 @@ using GXPEngine.Entities.Enemies;
 
 namespace GXPEngine.Entities
 {
+    /// <summary>
+    /// Class for FireBullets that are shot by the FireBulletShooter powerup
+    /// </summary>
     public class FireBullet : Entity
     {
         public FireBullet(float speed, int damage, bool mirrored) : base("sprites/collectibles/powerups/fire_bullet.png", 4, 1, 4)

@@ -1,14 +1,14 @@
 ﻿namespace GXPEngine.Entities
 {
+    /// <summary>
+    /// Base class for all entities
+    /// </summary>
     public class Entity : AnimationSprite
     {
-        //Base class of all entities
-        
         //Stats
         public int maxHealth;
         protected float speed;
         
-
         protected Entity(string filePath, int columns, int rows, int frames, bool addCollider = true) : base(filePath, columns, rows, frames, true, addCollider)
         {
             //This delayconstant is used by most entities
