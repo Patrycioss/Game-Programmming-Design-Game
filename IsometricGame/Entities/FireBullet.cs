@@ -4,19 +4,21 @@ using GXPEngine.Entities.Enemies;
 namespace GXPEngine.Entities
 {
     public class FireBullet : Entity
-    { 
-        private Collision collision;
-
+    {
         public FireBullet(float speed, int damage, bool mirrored) : base("sprites/collectibles/powerups/fire_bullet.png", 4, 1, 4)
         {
+            //Determines how far away from the player bullets spawn
+            //setting this too low may cause bullets to disappear immediately and/or damaging the player
             int bulletOffset = 10;
 
+            //Is a trigger so you can't jump on top of the bullet
             collider.isTrigger = true;
 
             SetScaleXY(2);
-
             attackDamage = damage;
 
+            
+            //Changes the orientation and direction based on if it's mirrored
             if (mirrored)
             {
                 Mirror(true, false);
@@ -32,20 +34,17 @@ namespace GXPEngine.Entities
 
         public override void Update()
         {
-            collision = MoveUntilCollision(speed * Time.deltaTime, 0, true);
+            Collision tileCollision = MoveUntilCollision(speed * Time.deltaTime, 0, true);
 
             Animate();
 
-            if (collision != null)
+            //Kills itself if it collides with a tile
+            if (tileCollision != null)
             {
-                if (collision.other != myGame.player)
-                {
-                    collision.other.Damage(attackDamage);
-                }
-
                 Kill();
             }
 
+            //If it collides with an enemy it damages the enemy and then kills itself
             foreach (GameObject gameObject in GetCollisions())
             {
                 if (gameObject is Enemy)
@@ -57,6 +56,7 @@ namespace GXPEngine.Entities
                 }
             }
 
+            //If the bullet is offScreen it kills itself for performance
             if (DistanceTo(myGame.player) > myGame.width)
             {
                 Kill();

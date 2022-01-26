@@ -287,7 +287,6 @@ namespace GXPEngine.Entities
         /// </summary>
         private void Jump()
         {
-            //TODO: Jump sound
             velocity.y -= jumpForce;
         }
         
