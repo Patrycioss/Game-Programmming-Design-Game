@@ -1,5 +1,4 @@
-﻿using System;
-using GXPEngine.Core;
+﻿using GXPEngine.Core;
 using GXPEngine.Extras;
 using GXPEngine.SpecialObjects.Collectibles;
 using GXPEngine.StageManagement;
@@ -9,7 +8,7 @@ namespace GXPEngine.Entities
 {
     public class Player : Entity 
     {
-        ///PLAYERINFO
+        ///PLAYER INFO
         
             //Visual
             private readonly AnimationSprite sprite;
@@ -314,7 +313,6 @@ namespace GXPEngine.Entities
         {
             foreach (GameObject gameObject in StageLoader.currentStage.GetObjects())
             {
-                Console.WriteLine(gameObject.name);
                 if (gameObject is Entity)
                 {
                     if (DistanceTo(gameObject) < 100)

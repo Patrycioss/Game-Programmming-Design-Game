@@ -16,7 +16,7 @@ namespace GXPEngine.Entities.Enemies
         {
             SetCycle(0,2);
             
-            //Desiredposition is the position of the player
+            //desiredPosition is the position of the player
             desiredPosition = new Vector2(myGame.player.x, myGame.player.y);
         }
 

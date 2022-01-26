@@ -1,5 +1,4 @@
-﻿using GXPEngine.Core;
-
+﻿
 namespace GXPEngine.Entities.Enemies
 {
     /// <summary>
