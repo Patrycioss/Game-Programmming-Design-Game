@@ -1,29 +1,27 @@
-﻿using System;
-using GXPEngine.Core;
+﻿using GXPEngine.StageManagement;
 
-namespace GXPEngine
+namespace GXPEngine.UserInterface.Menu
 {
-    public class Selection : AnimationSprite
+    public sealed class Selection : AnimationSprite
     {
-        private Stages targetStage;
-        private bool locked;
+        private readonly Stages targetStage;
+        private readonly bool locked;
 
-        private EasyDraw canvas;
-        public int coinsCollected;
-        public int collectibleCoins;
+        private readonly int coinsCollected;
+        private int collectibleCoins;
 
         public Selection(Stages stage, bool locked, int collectibleCoins) : base("sprites/selection/selection.png",3,1,3)
         {
             targetStage = stage;
             this.locked = locked;
             this.collectibleCoins = collectibleCoins;
-            canvas = new EasyDraw(width, height);
             
-            
+            EasyDraw canvas = new EasyDraw(width, height);
+
             //Text for amount of collected coins
             canvas.Fill(0); 
             canvas.TextAlign(CenterMode.Center,CenterMode.Center);
-            canvas.Text(coinsCollected + "/" + collectibleCoins, width*0.8f, height/2);
+            canvas.Text(coinsCollected + "/" + collectibleCoins, width*0.8f, height/2.0f);
             coinsCollected = 0;
             AddChild(canvas);
         }

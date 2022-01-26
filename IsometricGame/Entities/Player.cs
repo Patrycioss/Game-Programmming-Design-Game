@@ -1,33 +1,24 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.Remoting;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
-using System.Security.Cryptography;
-using System.Threading;
-using System.Xml.Schema;
 using GXPEngine.Core;
-using GXPEngine.Enemies;
-using Microsoft.Win32.SafeHandles;
-using TiledMapParser;
+using GXPEngine.Extras;
+using GXPEngine.SpecialObjects.Collectibles;
+using GXPEngine.StageManagement;
+using GXPEngine.UserInterface;
 
-namespace GXPEngine
+namespace GXPEngine.Entities
 {
     public class Player : Entity 
     {
         //PlayerInfo
-        public State currentState;
-
-        public Vector2 velocity;
         
-        public Vector2 center;
+        private readonly AnimationSprite sprite;
+        
+        private State currentState;
+        private Vector2 velocity;
+        private Vector2 center;
 
         private bool wasGrounded;
         private bool isGrounded;
-        
-        private AnimationSprite sprite;
         
         public bool mirrored;
 
@@ -35,38 +26,36 @@ namespace GXPEngine
 
         //Collision
         private Collision verticalCollision;
-        private Collision horizontalCollision;
 
-        //Constants    
-        private float gravitationalForce;
+        //Constants   
+        private readonly float  jumpForce;
+        private readonly float gravitationalForce;
+        private readonly float baseSpeed;
+        private readonly float runSpeed;
+        
+        private float currentMovementSpeed;
+        
+        //Immunity frames
+        private Timer immunityTimer;
+        private readonly int immunityDuration;
 
-        private float baseSpeed;
-        private float runSpeed;
-        private float movementSpeed;
-
-
-
-        //JUMP
-        private float jumpForce;
-
-        public Timer immunityTimer;
-        public int immunityDuration;
-
-        public Player() : base("sprites/player/hitbox.png", 1, 1, 1, true)
+        public Player() : base("sprites/player/hitbox.png", 1, 1, 1)
         {
             collider.isTrigger = true;
             alpha = 0;
             
             //Make the player model
-            sprite = new AnimationSprite("sprites/player/player.png", 3, 1 , 3, true, false);
-            sprite.alpha = 1;
-            sprite.width = 50;
-            sprite.height = 50;
+            sprite = new AnimationSprite("sprites/player/player.png", 3, 1, 3, true, false)
+            {
+                alpha = 1,
+                width = 50,
+                height = 50
+            };
             AddChild(sprite);
             
             
             //Positional info
-            center = new Vector2(x + width / 2, y + height / 2);
+            center = new Vector2(0,0);
             
             //Stats
             attackDamage = 1;
@@ -82,7 +71,7 @@ namespace GXPEngine
             //Movement
             baseSpeed = 0.4f;
             runSpeed = 0.5f;
-            movementSpeed = baseSpeed;
+            currentMovementSpeed = baseSpeed;
             
             //Jumping
             jumpForce = 1.4f;
@@ -91,23 +80,18 @@ namespace GXPEngine
             gravitationalForce = 0.005f;
 
             //Animation
-            sprite.SetCycle(0, 2, _animationDelay, true);
+            sprite.SetCycle(0, 2, _animationDelay);
             
    
         }
 
         void UpdateInformation()
         {
-            center.Set(x + width / 2, y + height / 2);
+            center.Set(x + width / 2.0f, y + height / 2.0f);
             wasGrounded = isGrounded;
-
-            if (_mirrorX)
-            {
-                mirrored = true;
-            }
-            else mirrored = false;
+            mirrored = _mirrorX;
         }
-        
+
         public override void Update()
         {
             UpdateInformation();
@@ -135,12 +119,12 @@ namespace GXPEngine
                 if (!immunityTimer.finished)
                 {
                     sprite.alpha = Utils.Random(0.4f, 1);
-                    movementSpeed = runSpeed;
+                    currentMovementSpeed = runSpeed;
                 }
                 else
                 {
                     sprite.alpha = 1;
-                    movementSpeed = baseSpeed;
+                    currentMovementSpeed = baseSpeed;
 
                     if (collider.isTrigger)
                     {
@@ -158,7 +142,7 @@ namespace GXPEngine
             
             //Move the player and store its vertical and horizontal collision
             verticalCollision = MoveUntilCollision(0, velocity.y * Time.deltaTime); 
-            horizontalCollision = MoveUntilCollision(velocity.x * Time.deltaTime, 0);
+            MoveUntilCollision(velocity.x * Time.deltaTime, 0);
 
                 //STATES//
                 //This switch statement switches according to 1 of 3 states: Stand, Walk or Jump//
@@ -169,7 +153,7 @@ namespace GXPEngine
                 {
                     case State.Stand:
 
-                        sprite.SetCycle(0,1,switchFrame: true);
+                        sprite.SetCycle(0,switchFrame: true);
                         
                         velocity.Set(0, 0);
                         
@@ -182,14 +166,12 @@ namespace GXPEngine
                         if (Input.GetKey(Key.A) != Input.GetKey(Key.D))
                         {
                             currentState = State.Walk;
-                            break;
                         }
 
                         else if (Input.GetKey(Key.SPACE))
                         {
                             Jump();
                             currentState = State.Jump;
-                            break;
                         }
 
                         break;
@@ -207,12 +189,12 @@ namespace GXPEngine
 
                         else if (Input.GetKey(Key.D))
                         {
-                            velocity.x = movementSpeed;
+                            velocity.x = currentMovementSpeed;
                             Mirror(false, false);
                         }
                         else if (Input.GetKey(Key.A))
                         {
-                            velocity.x = -movementSpeed;
+                            velocity.x = -currentMovementSpeed;
                             Mirror(true, false);
                         }
 
@@ -220,13 +202,10 @@ namespace GXPEngine
                         {
                             Jump();
                             currentState = State.Jump;
-                            break;
-
                         }
                         else if (!isGrounded && !wasGrounded)
                         {
                             currentState = State.Jump;
-                            break;
                         }
 
                         break;
@@ -242,13 +221,13 @@ namespace GXPEngine
                         }
                         else if (Input.GetKey(Key.D))
                         {
-                            velocity.x = movementSpeed;
+                            velocity.x = currentMovementSpeed;
                             Mirror(false, false);
                  
                         }
                         else if (Input.GetKey(Key.A))
                         {
-                            velocity.x = -movementSpeed;
+                            velocity.x = -currentMovementSpeed;
                             Mirror(true, false);
                         }
 
@@ -256,13 +235,11 @@ namespace GXPEngine
                         {
                             velocity.y = 0;
                             currentState = State.Walk;
-                            break;
                         }
                         else if (isGrounded)
                         {
                             velocity.y = 0;
                             currentState = State.Stand;
-                            break;
                         }
 
                         break;
@@ -270,7 +247,7 @@ namespace GXPEngine
             }
         
 
-        public enum State
+        private enum State
         {
             Stand,
             Walk,
@@ -283,7 +260,7 @@ namespace GXPEngine
             velocity.y -= jumpForce;
         }
         
-        public void CheckIfGrounded()
+        private void CheckIfGrounded()
         {
            if (verticalCollision != null)
            {
@@ -293,7 +270,7 @@ namespace GXPEngine
                }
                else velocity.y = 0;
            }
-            else isGrounded = false;
+           else isGrounded = false;
         }
         
         public override void Damage(int amount)
@@ -350,11 +327,7 @@ namespace GXPEngine
 
         public void ToggleHitBox()
         {
-            if (alpha == 0)
-            {
-                alpha = 1;
-            }
-            else alpha = 0;
+            alpha = -alpha + 1;
         }
         
 

@@ -1,4 +1,4 @@
-﻿namespace GXPEngine
+﻿namespace GXPEngine.Extras
 {
     public class Background : Sprite
     {

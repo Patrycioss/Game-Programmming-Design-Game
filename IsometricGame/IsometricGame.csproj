@@ -40,19 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Background.cs" />
-    <Compile Include="Collectible.cs" />
-    <Compile Include="Enemies\Basic.cs" />
-    <Compile Include="Enemies\Enemy.cs" />
-    <Compile Include="Enemies\Ghost.cs" />
-    <Compile Include="Entity.cs" />
-    <Compile Include="Extra.cs" />
-    <Compile Include="Finish.cs" />
+    <Compile Include="Entities\Enemies\Basic.cs" />
+    <Compile Include="Entities\Enemies\Enemy.cs" />
+    <Compile Include="Entities\Enemies\Ghost.cs" />
+    <Compile Include="Entities\Entity.cs" />
+    <Compile Include="Entities\FireBullet.cs" />
+    <Compile Include="Entities\Player.cs" />
+    <Compile Include="Extras\Background.cs" />
+    <Compile Include="Extras\Extra.cs" />
+    <Compile Include="Extras\Timer.cs" />
     <Compile Include="GXPEngine\AddOns\Gizmos.cs" />
     <Compile Include="GXPEngine\AddOns\SpriteBatch.cs" />
     <Compile Include="GXPEngine\AddOns\TiledLoader.cs" />
-    <Compile Include="Hud.cs" />
-    <Compile Include="Menu\Menu.cs" />
     <Compile Include="MyGame.cs" />
     <Compile Include="GXPEngine\Core\Canvas.cs" />
     <Compile Include="GXPEngine\Game.cs" />
@@ -91,17 +90,17 @@
     <Compile Include="GXPEngine\FMOD\FMODSoundSystem.cs" />
     <Compile Include="GXPEngine\SoLoud\Soloud.cs" />
     <Compile Include="GXPEngine\SoLoud\SoloudSoundSystem.cs" />
-    <Compile Include="ParticleGenerator.cs" />
-    <Compile Include="Player.cs" />
-    <Compile Include="Powerup.cs" />
-    <Compile Include="Selection.cs" />
-    <Compile Include="Sign.cs" />
-    <Compile Include="Stage.cs" />
-    <Compile Include="StageCreator.cs" />
-    <Compile Include="StageLoader.cs" />
-    <Compile Include="Stages.cs" />
-    <Compile Include="Timer.cs" />
-    <Compile Include="Walkthrough.cs" />
+    <Compile Include="SpecialObjects\Collectibles\Collectible.cs" />
+    <Compile Include="SpecialObjects\Collectibles\Powerup.cs" />
+    <Compile Include="SpecialObjects\Finish.cs" />
+    <Compile Include="SpecialObjects\Sign.cs" />
+    <Compile Include="StageManagement\Stage.cs" />
+    <Compile Include="StageManagement\StageCreator.cs" />
+    <Compile Include="StageManagement\StageLoader.cs" />
+    <Compile Include="StageManagement\Stages.cs" />
+    <Compile Include="UserInterface\Hud.cs" />
+    <Compile Include="UserInterface\Menu\Menu.cs" />
+    <Compile Include="UserInterface\Menu\Selection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

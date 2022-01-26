@@ -1,13 +1,11 @@
-﻿using System;
-using System.Drawing;
-using GXPEngine.Core;
+﻿
 
-namespace GXPEngine.Enemies
+namespace GXPEngine.Entities.Enemies
 {
     public class Basic : Enemy
     {
         //Base class for basic enemy ai (move until it hits something then turns around)
-        public Basic(string filePath, int columns, int rows, int frames) : base(filePath, columns, rows, frames)
+        protected Basic(string filePath, int columns, int rows, int frames) : base(filePath, columns, rows, frames)
         {
             collider.isTrigger = true;
         }
@@ -19,13 +17,8 @@ namespace GXPEngine.Enemies
             if (collision != null)
             {
                 speed = -speed;
-                if (speed < 0)
-                {
-                    Mirror(true,false);
-                }
-                else Mirror(false,false);
-            } 
-            
+                _mirrorX = (speed < 0 );
+            }
             Animate();
 
         }

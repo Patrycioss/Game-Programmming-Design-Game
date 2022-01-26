@@ -1,21 +1,20 @@
-﻿using System;
-using GXPEngine.Core;
+﻿using GXPEngine.Core;
 
-namespace GXPEngine.Enemies
+namespace GXPEngine.Entities.Enemies
 {
     public class Ghost : Enemy
     {
-        protected Vector2 position;
-        protected Vector2 desiredPosition;
-        protected Vector2 direction;
+        private Vector2 position;
+        private Vector2 desiredPosition;
+        private Vector2 direction;
         protected int detectionRadius;
 
         //Can fly through walls?
         protected bool ghosting;
         
-        public Ghost(string filePath, int columns, int rows, int frames) : base(filePath, columns, rows, frames)
+        protected Ghost(string filePath, int columns, int rows, int frames) : base(filePath, columns, rows, frames)
         {
-            SetCycle(0,2,255);
+            SetCycle(0,2);
             position = new Vector2(x, y);
             desiredPosition = new Vector2(_myGame.player.x, _myGame.player.y);
         }
@@ -47,13 +46,8 @@ namespace GXPEngine.Enemies
             }
 
             //Mirror if necessary
-
-            if (direction.x < 0)
-            {
-                Mirror(true, false);
-            }
-            else Mirror(false, false);
-
+            _mirrorX = (direction.x < 0);
+            
             Animate();
         }
     }

@@ -1,25 +1,21 @@
-﻿using System;
-using System.Xml.Schema;
-using GXPEngine.Managers;
-
-namespace GXPEngine
+﻿namespace GXPEngine.SpecialObjects.Collectibles
 {
     public class Collectible : AnimationSprite
     {
         protected Sound sound;
 
-        public Collectible(string filePath, int columns, int rows, int frames) : base(filePath, columns, rows, frames, true, true)
+        protected Collectible(string filePath, int columns, int rows, int frames) : base(filePath, columns, rows, frames, true)
         {
             collider.isTrigger = true;
         }
 
         protected void Update()
-        { 
+        {
             if (DistanceTo(_myGame.player) < 32)
-                {
-                    Action();
-                    this.Destroy();
-                }
+            {
+                Action();
+                this.Destroy();
+            }
 
             AnimateFixed();
         }

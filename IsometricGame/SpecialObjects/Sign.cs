@@ -1,12 +1,9 @@
-﻿using System;
-using System.Diagnostics;
-using TiledMapParser;
-
-namespace GXPEngine
+﻿
+namespace GXPEngine.SpecialObjects
 {
     public class Sign : Sprite
     {
-        private EasyDraw canvas;
+        private readonly EasyDraw canvas;
 
         public Sign(string text) : base("sprites/misc/sign.png")
         {
@@ -24,11 +21,7 @@ namespace GXPEngine
 
         void Update()
         {
-            if (HitTest(_myGame.player))
-            {
-                canvas.visible = true;
-            }
-            else canvas.visible = false;
+            canvas.visible = (HitTest(_myGame.player));
         }
     }
 }

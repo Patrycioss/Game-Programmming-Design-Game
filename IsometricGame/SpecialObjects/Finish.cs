@@ -1,12 +1,13 @@
-﻿using System;
-using GXPEngine.Core;
+﻿using GXPEngine.Core;
+using GXPEngine.StageManagement;
+using GXPEngine.UserInterface;
 
-namespace GXPEngine
+namespace GXPEngine.SpecialObjects
 {
     public class Finish : Sprite
     {
         private Vector2 destination;
-        public Finish(string imagePath, float x, float y) : base(imagePath, false, true)
+        public Finish(string imagePath, float x, float y) : base(imagePath, addCollider: true)
         {
             this.x = x;
             this.y = y;
@@ -17,9 +18,9 @@ namespace GXPEngine
 
         }
 
-        public void SetPlayerDestination(float x, float y)
+        public void SetPlayerDestination( float newX, float newY)
         {
-            destination.Set(x,y);
+            destination.Set(newX,newY);
         }
 
         void Update()

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using GXPEngine.Core;
+﻿using GXPEngine.Core;
 
-namespace GXPEngine.Enemies
+namespace GXPEngine.Entities.Enemies
 {
     public class Enemy : Entity
     {
@@ -11,7 +8,7 @@ namespace GXPEngine.Enemies
         
         protected Collision collision;
 
-        public Enemy(string filePath, int columns, int rows, int frames) : base(filePath, columns, rows, frames)
+        protected Enemy(string filePath, int columns, int rows, int frames) : base(filePath, columns, rows, frames)
         {
             collider.isTrigger = false;
         }

@@ -1,28 +1,25 @@
-﻿using System;
-using GXPEngine.Core;
-using GXPEngine.Managers;
+﻿using GXPEngine.Core;
 using TiledMapParser;
 
-namespace GXPEngine
+namespace GXPEngine.UserInterface
 {
     public class Hud : GameObject
     {
-        private TiledLoader _tiledLoader;
-        private EasyDraw canvas;
+        private readonly EasyDraw canvas;
         
-        public int coinAmount;
+        private int coinAmount;
         
         private Vector2 coinAmountPos;
         private Vector2 healthBarOrigin;
 
-        public Sprite[] hearts;
+        private Sprite[] hearts;
         
 
         public Hud()
         {
             //Initializing variables
             canvas = new EasyDraw(_myGame.width, _myGame.height, false);
-            _tiledLoader = new TiledLoader("tiled/hud.tmx", canvas, false);
+            TiledLoader tiledLoader = new TiledLoader("tiled/hud.tmx", canvas, false);
 
             //Monetary Gains
             coinAmount = 0;
@@ -33,13 +30,13 @@ namespace GXPEngine
             healthBarOrigin = new Vector2(-1000, -1000);
             
             //Place to add extra exceptions
-            _tiledLoader.AddManualType("CoinAmount");
-            _tiledLoader.AddManualType("HealthBarOrigin");
+            tiledLoader.AddManualType("CoinAmount");
+            tiledLoader.AddManualType("HealthBarOrigin");
             
             //Loading objects
-            _tiledLoader.OnObjectCreated += OnWeirdObjectCreated;
-            _tiledLoader.LoadObjectGroups();
-            _tiledLoader.OnObjectCreated -= OnWeirdObjectCreated;
+            tiledLoader.OnObjectCreated += OnWeirdObjectCreated;
+            tiledLoader.LoadObjectGroups();
+            tiledLoader.OnObjectCreated -= OnWeirdObjectCreated;
       
 
             //Canvas properties
@@ -62,13 +59,9 @@ namespace GXPEngine
             UpdateCanvas();
         }
         
-       public void UpdateCanvas()
-        {
-            canvas.ClearTransparent();
-            canvas.Text(coinAmount.ToString(),coinAmountPos.x,coinAmountPos.y);
-        }
+       
 
-       void OnWeirdObjectCreated(Sprite sprite, TiledObject obj)
+        private void OnWeirdObjectCreated(Sprite sprite, TiledObject obj)
         {
             
             switch (obj.Type)
@@ -84,7 +77,6 @@ namespace GXPEngine
                     {
                         AddHeart();
                     }
-                    
                     break;
             }
             
@@ -109,24 +101,7 @@ namespace GXPEngine
             }
             UpdateCanvas();
         }
-
-        public void AddHeart()
-        {
-            for (int i = 0; i < hearts.Length; i++)
-            {
-                if (hearts[i] == null)
-                {
-                    hearts[i] = new Sprite("sprites/collectibles/heart/heart_big.png");
-                    hearts[i].SetXY(healthBarOrigin.x - (64 * i), healthBarOrigin.y);
-                    canvas.AddChild(hearts[i]);
-
-                    break;
-                }
-            }
-            
-            UpdateCanvas();
-        }
-
+        
         public override void AddHealth(int amount)
         {
             for (int i = 0; i < amount; i++)
@@ -158,6 +133,27 @@ namespace GXPEngine
             }    
         }
         
+        private void UpdateCanvas()
+        {
+            canvas.ClearTransparent();
+            canvas.Text(coinAmount.ToString(),coinAmountPos.x,coinAmountPos.y);
+        }
+        
+        private void AddHeart()
+        {
+            for (int i = 0; i < hearts.Length; i++)
+            {
+                if (hearts[i] == null)
+                {
+                    hearts[i] = new Sprite("sprites/collectibles/heart/heart_big.png");
+                    hearts[i].SetXY(healthBarOrigin.x - (64 * i), healthBarOrigin.y);
+                    canvas.AddChild(hearts[i]);
+
+                    break;
+                }
+            }
+            UpdateCanvas();
+        }
         
     }
 }

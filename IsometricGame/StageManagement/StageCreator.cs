@@ -1,12 +1,9 @@
 ﻿using System;
 
-namespace GXPEngine
+namespace GXPEngine.StageManagement
 {
     public class StageCreator : GameObject
     {
-
-        public StageCreator() {}
-        
         public void SetStage(Enum stage)
         {
             switch (stage)
@@ -33,10 +30,9 @@ namespace GXPEngine
                     StageLoader.LoadStage(Stages.Stage2);
                     
                     break;
-                
-
             }
         }
-      
+
+
     }
 }

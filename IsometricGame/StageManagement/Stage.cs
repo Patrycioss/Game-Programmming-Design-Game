@@ -1,28 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Runtime.InteropServices;
-using System.Runtime.Remoting.Channels;
-using System.Xml.Schema;
-using GXPEngine.Core;
-using GXPEngine.Enemies;
+using GXPEngine.Entities;
+using GXPEngine.Entities.Enemies;
+using GXPEngine.SpecialObjects.Collectibles;
 using TiledMapParser;
 
-namespace GXPEngine
+namespace GXPEngine.StageManagement
 {
     public class Stage : GameObject
     {
 
-        private Map stageData;
-        private int tileSize;
-
-        public int stageWidth;
-        public int stageHeight;
-
-
-        private Pivot[] layers;
+        private readonly Map stageData;
+        private readonly int tileSize;
+        private readonly Pivot[] layers;
         
-
+        public int stageHeight;
+        public int stageWidth;
+        
         private SpriteBatch spriteBatch;
 
         public Stage(string stagePath)
@@ -57,9 +51,6 @@ namespace GXPEngine
             spriteBatch = new SpriteBatch();
 
             Layer mainLayer = stageData.Layers[0];
-            
-            
-            
             
             short[,] tileNumbers = mainLayer.GetTileArray();
 
@@ -218,7 +209,9 @@ namespace GXPEngine
             }
             spriteBatch.Freeze();
             layers[0].AddChild(spriteBatch);
-
+            
+            
+            
             //Setup barriers
             Sprite barrier = new Sprite("sprites/tiles/checkers.png");
             barrier.SetXY(-20,0);

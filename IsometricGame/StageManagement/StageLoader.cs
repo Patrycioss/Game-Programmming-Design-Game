@@ -1,12 +1,10 @@
 ﻿using System;
 
-namespace GXPEngine
+namespace GXPEngine.StageManagement
 {
     public static class StageLoader
     {
         public static Stage currentStage;
-
-        public static float x, y;
         
         public static void LoadStage(Stages stage)
         {
@@ -17,14 +15,10 @@ namespace GXPEngine
             
             
             //Add file structure text
-            string stageName = "tiled/stages/" + stage.ToString() + ".tmx";
+            string stagePath = "tiled/stages/" + stage.ToString() + ".tmx";
             
             
-            currentStage = new Stage(stageName);
-            
-            x = currentStage.x;
-            y = currentStage.y;
-
+            currentStage = new Stage(stagePath);
         }
 
         public static void ClearStage()

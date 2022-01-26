@@ -1,4 +1,4 @@
-﻿namespace GXPEngine
+﻿namespace GXPEngine.StageManagement
 {
     public enum Stages
     {

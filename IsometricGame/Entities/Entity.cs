@@ -1,29 +1,25 @@
-﻿namespace GXPEngine
+﻿namespace GXPEngine.Entities
 {
     public class Entity : AnimationSprite
     {
         //Base class of all entities
         
-        //A variable that can be edited in all subclasses to ensure the animationspeed is fitting for the entity
-        protected int delayConstant;
-       
         //Stats
         public int maxHealth;
-        public float speed;
+        protected float speed;
         
 
-        public Entity(string filePath, int columns, int rows, int frames, bool addCollider = true) : base(filePath, columns, rows, frames, true, addCollider)
+        protected Entity(string filePath, int columns, int rows, int frames, bool addCollider = true) : base(filePath, columns, rows, frames, true, addCollider)
         {
-            //This delayconstant is used by most enities
-            delayConstant = 120;
-            
+            //This delayconstant is used by most entities
+            int delayConstant = 120;
+
             //Calculates the amount of animationdelay needed based on the constant and the delta time
             if (Time.deltaTime > 1)
             {
                 _animationDelay = (byte)(delayConstant / Time.deltaTime);
             }
-            else _animationDelay = 40; 
-            
+            else _animationDelay = 40;
         }
 
         public virtual void Update(){}
@@ -31,7 +27,7 @@
 
         public override void Damage(int amount)
         {
-            //All entities can receive damage, this class also exists empty in GameObject so we can acccess this function when we use Hittest()
+            //All entities can receive damage, this class also exists empty in GameObject so we can access this function when we use Hittest()
             
             health -= amount;
 
