@@ -1,5 +1,8 @@
 ﻿namespace GXPEngine.Extras
 {
+    /// <summary>
+    /// Static class to add useful functions
+    /// </summary>
     public static class Extra
     {
         public static float Remap (this float value, float from1, float to1, float from2, float to2) 

@@ -1,6 +1,9 @@
 ﻿
 namespace GXPEngine.Extras
 {
+    /// <summary>
+    /// Class to make timers
+    /// </summary>
     public class Timer : GameObject
     {
         public bool finished;
