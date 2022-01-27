@@ -24,7 +24,7 @@ namespace GXPEngine.Entities
             attackDamage = damage;
 
             //Soundeffect
-            sound = new Sound("fireBullet.ogg");
+            sound = new Sound("sounds/fireBullet.ogg");
             volume = 1.0f;
             soundPlayed = false;
             
@@ -77,7 +77,12 @@ namespace GXPEngine.Entities
                 sound.Play();
                 soundPlayed = true;
             }
-            
+        }
+        public override void Kill()
+        {
+            Sound explosion = new Sound("sounds/explosion.ogg");
+            explosion.Play(volume:0.3f);
+            LateDestroy();
         }
     }
             
