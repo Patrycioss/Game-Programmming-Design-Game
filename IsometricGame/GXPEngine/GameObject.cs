@@ -18,13 +18,14 @@ namespace GXPEngine
 		public bool visible = true;
 		private bool destroyed = false;
 
-		public int attackDamage;
-		public int health;
+	
 		
 
 		
 		//SELF-ADDED
 		protected MyGame myGame;
+		public int attackDamage;
+		public int health;
 		
 		/// <summary>
 		/// This function exists here solely to allow it to be used with Hittest() information
@@ -40,10 +41,12 @@ namespace GXPEngine
 		/// This function exists here solely to allow it to be used with Hittest() information
 		/// </summary>
 		public virtual void Kill() {}
-
-
-
-
+		
+		/// <summary>
+		/// This function exists here solely to allow it to be used with Hittest() information
+		/// </summary>
+		public virtual void PlaySound(){}
+		
 		//------------------------------------------------------------------------------------------------------------------------
 		//														GameObject()
 		//------------------------------------------------------------------------------------------------------------------------

@@ -1,4 +1,5 @@
-﻿using GXPEngine.Core;
+﻿using System;
+using GXPEngine.Core;
 using GXPEngine.Entities.Enemies;
 
 namespace GXPEngine.Entities
@@ -8,6 +9,8 @@ namespace GXPEngine.Entities
     /// </summary>
     public class FireBullet : Entity
     {
+        private bool soundPlayed;
+        
         public FireBullet(float speed, int damage, bool mirrored) : base("sprites/collectibles/powerups/fire_bullet.png", 4, 1, 4)
         {
             //Determines how far away from the player bullets spawn
@@ -20,6 +23,10 @@ namespace GXPEngine.Entities
             SetScaleXY(2);
             attackDamage = damage;
 
+            //Soundeffect
+            sound = new Sound("fireBullet.ogg");
+            volume = 1.0f;
+            soundPlayed = false;
             
             //Changes the orientation and direction based on if it's mirrored
             if (mirrored)
@@ -64,6 +71,13 @@ namespace GXPEngine.Entities
             {
                 Kill();
             }
+
+            if (!soundPlayed)
+            {
+                sound.Play();
+                soundPlayed = true;
+            }
+            
         }
     }
             

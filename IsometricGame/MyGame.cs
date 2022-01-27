@@ -12,10 +12,13 @@ namespace GXPEngine
 		public readonly Menu menu;
 		public Hud hud;
 
+		private Sound music;
+		private float volume;
+
 		//From what x does the screen start scrolling
 		private readonly int scrollX;
 	
-		private MyGame() : base(1900, 1080, true, true, -1, -1, true)
+		private MyGame() : base(1920, 1080, true, true, -1, -1, true)
 		{
 			//From what point onwards the screen starts scrolling with the player
 			scrollX = width / 2;
@@ -25,12 +28,16 @@ namespace GXPEngine
 			player = new Player();
 			hud = new Hud();
 
+			music = new Sound("sounds/music.mp3", true, true);
+			
 			//Background	
 			Background currentBackground = new Background("backgrounds/standard.png");
 
 			AddChild(currentBackground);
 			AddChild(menu);
 
+			volume = 0.2f;
+			music.Play(volume:volume);
 		}
 	
 		void Update()

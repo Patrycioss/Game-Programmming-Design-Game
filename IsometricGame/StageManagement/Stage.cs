@@ -252,11 +252,38 @@ namespace GXPEngine.StageManagement
             barrier.height = stageHeight;
             AddObjectAtLayer(barrier,1);
 
+            
+            
 
+         
+
+            foreach (TiledObject obj in stageData.ObjectGroups[0].Objects)
+            {
+                switch (obj.ID)
+                {
+                    //Creates text based on text placed in the tiledmap
+                    case 256:
+                        EasyDraw canvas = new EasyDraw((int)obj.Width * 5, (int)obj.Height*5, false);
+                        canvas.SetXY(obj.X,obj.Y);
+                        canvas.TextAlign(CenterMode.Min,CenterMode.Min);
+                        canvas.Text(obj.textField.text);
+                        layers[0].AddChild(canvas);
+                        break;
+                        
+                     case 257:
+                         Sign sign = new Sign(obj.Name);
+                         sign.SetXY(obj.X,obj.Y - 64);
+                         layers[0].AddChild(sign);
+                         break;
+                }
+            }
+            
             foreach (Pivot pivot in layers)
             {
                 AddChild(pivot);
             }
+            
+            
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
 ﻿using GXPEngine.Core;
+using GXPEngine.Extras;
 
 namespace GXPEngine.Entities.Enemies
 {
@@ -11,13 +12,15 @@ namespace GXPEngine.Entities.Enemies
         private Vector2 direction;
         protected int detectionRadius;
         protected bool canGoThroughWalls;
-        
+
         protected Ghost(string filePath, int columns, int rows, int frames) : base(filePath, columns, rows, frames)
         {
             SetCycle(0,2);
             
             //desiredPosition is the position of the player
             desiredPosition = new Vector2(myGame.player.x, myGame.player.y);
+            sound = new Sound("sounds/ghost.ogg");
+            volume = 0.2f;
         }
 
         public override void Update()
@@ -36,7 +39,7 @@ namespace GXPEngine.Entities.Enemies
                 if (canGoThroughWalls) Move(Time.deltaTime * direction.x, Time.deltaTime*direction.y);
                 else MoveUntilCollision(Time.deltaTime * direction.x, Time.deltaTime * direction.y);
             }
-
+            
             //Mirror if necessary
             _mirrorX = (direction.x < 0);
             

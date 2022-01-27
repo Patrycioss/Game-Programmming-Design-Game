@@ -320,6 +320,7 @@ namespace GXPEngine.Entities
                         if (HitTest(gameObject) && !(Equals(gameObject)))
                         {
                             Damage(gameObject.attackDamage);
+                            gameObject.PlaySound();
                             break;
                         }
                     }

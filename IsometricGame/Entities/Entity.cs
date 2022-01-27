@@ -1,4 +1,7 @@
-﻿namespace GXPEngine.Entities
+﻿using System;
+using GXPEngine.Extras;
+
+namespace GXPEngine.Entities
 {
     /// <summary>
     /// Base class for all entities
@@ -9,8 +12,13 @@
         public int maxHealth;
         protected float speed;
         
+        protected Sound sound;
+        protected float volume;
+        protected Timer soundDelay;
+        
         protected Entity(string filePath, int columns, int rows, int frames, bool addCollider = true) : base(filePath, columns, rows, frames, true, addCollider)
         {
+            soundDelay = new Timer(1000, true, false);
             //This delayconstant is used by most entities
             int delayConstant = 120;
 
@@ -55,6 +63,18 @@
         public override void Kill()
         {
             LateDestroy();
+        }
+
+        public override void PlaySound()
+        {
+            if (soundDelay.finished || soundDelay.IsPaused)
+            {
+                Console.WriteLine("hoi");
+                sound.Play(volume:volume);
+                soundDelay.Reset();
+                soundDelay.IsPaused = false;
+            } 
+            
         }
     }
 }
