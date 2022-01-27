@@ -69,7 +69,7 @@ namespace GXPEngine.Entities
             //If the bullet is offScreen it kills itself for performance
             if (DistanceTo(myGame.player) > myGame.width)
             {
-                Kill();
+                LateDestroy();
             }
 
             if (!soundPlayed)

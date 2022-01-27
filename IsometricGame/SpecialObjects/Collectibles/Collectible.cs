@@ -55,12 +55,12 @@
         {
             collider.isTrigger = true;
 
-            pickupSound = new Sound("heart.wav");
+            pickupSound = new Sound("sounds/heart.wav");
         }
         
         protected override void Action()
         {
-            pickupSound.Play(volume:2.0f);
+            pickupSound.Play(volume:1.5f);
             
             myGame.player.AddHealth(1);
         }

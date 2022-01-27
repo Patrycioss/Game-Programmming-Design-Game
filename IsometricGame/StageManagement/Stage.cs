@@ -90,7 +90,7 @@ namespace GXPEngine.StageManagement
                         layers[1].AddChild(slime);
                         break;
                     
-                    case 126:
+                    case 116:
                         Flyer flyer = new Flyer();
                         flyer.SetXY(col*tileSize,row*tileSize);
                         layers[1].AddChild(flyer);

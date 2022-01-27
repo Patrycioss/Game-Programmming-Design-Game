@@ -15,7 +15,8 @@ Sounds:
 8-bit Video Game Sounds - ProjectsU012 - https://freesound.org/people/ProjectsU012/packs/18837/?page=3#sound
 explosion_06 - derplayer - https://freesound.org/people/derplayer/sounds/587196/
 Patrick Schuur (me): ghost
-
+heart pickup - MATRIXXX_ - https://freesound.org/people/MATRIXXX_/sounds/523655/
+fire pickup - MATRIXXX_ - https://freesound.org/people/MATRIXXX_/sounds/523649/
 
 Music:
 

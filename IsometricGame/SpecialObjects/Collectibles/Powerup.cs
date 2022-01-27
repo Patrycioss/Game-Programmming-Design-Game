@@ -1,4 +1,5 @@
-﻿using GXPEngine.Entities;
+﻿using System;
+using GXPEngine.Entities;
 using GXPEngine.Extras;
 using GXPEngine.StageManagement;
 
@@ -20,6 +21,7 @@ namespace GXPEngine.SpecialObjects.Collectibles
         protected override void Action()
         {
             myGame.player.currentPowerup = this;
+            pickupSound.Play(volume:1.0f);
         }
 
           
@@ -46,6 +48,8 @@ namespace GXPEngine.SpecialObjects.Collectibles
             speed = 1f;
             coolDown = 1000;
             damage = 1;
+
+            pickupSound = new Sound("sounds/fire.wav");
         }
 
         public override void Use()
@@ -57,5 +61,7 @@ namespace GXPEngine.SpecialObjects.Collectibles
                 StageLoader.AddObjectAtLayer(new FireBullet(speed, damage, myGame.player.mirrored),1);
             }
         }
+
+      
     }
 }
