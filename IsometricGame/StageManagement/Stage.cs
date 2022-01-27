@@ -78,7 +78,7 @@ namespace GXPEngine.StageManagement
                         layers[1].AddChild(myGame.player);
                         break;
                     
-                    case 78:
+                    case 79:
                         myGame.player = new Player();
                         myGame.player.SetXY(col*tileSize, row*tileSize);
                         layers[1].AddChild(myGame.player);
