@@ -31,6 +31,8 @@ namespace GXPEngine.Entities.Enemies
     {
         public GreenSlime() : base("sprites/enemies/green_slime2.png", 2, 1, 2)
         {
+            sound = new Sound("sounds/slime.ogg");
+            volume = 1.0f;
             speed = 0.2f;
             attackDamage = 1;
             health = 1;
@@ -44,6 +46,8 @@ namespace GXPEngine.Entities.Enemies
     {
         public Flyer() : base("sprites/enemies/flying2.png", 2, 1, 2)
         {
+            sound = new Sound("sounds/flyer.mp3");
+            volume = 1.0f;
             speed = 0.2f;
             attackDamage = 1;
             health = 2; 

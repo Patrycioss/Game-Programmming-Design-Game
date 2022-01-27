@@ -26,6 +26,8 @@ namespace GXPEngine.Entities
             if (Time.deltaTime > 1)
             {
                 _animationDelay = (byte)(delayConstant / Time.deltaTime);
+
+                if (_animationDelay < 40) _animationDelay = 40;
             }
             else _animationDelay = 40;
         }

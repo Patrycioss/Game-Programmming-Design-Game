@@ -63,6 +63,7 @@ namespace GXPEngine
 				{
 					player.ToggleHitBox();
 				}
+			
 		
 		}
 
