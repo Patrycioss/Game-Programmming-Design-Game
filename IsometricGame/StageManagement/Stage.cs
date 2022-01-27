@@ -78,6 +78,12 @@ namespace GXPEngine.StageManagement
                         layers[1].AddChild(myGame.player);
                         break;
                     
+                    case 78:
+                        myGame.player = new Player();
+                        myGame.player.SetXY(col*tileSize, row*tileSize);
+                        layers[1].AddChild(myGame.player);
+                        break;
+                    
                     case 122:
                         GreenSlime slime = new GreenSlime();
                         slime.SetXY(col*tileSize,row*tileSize + 27);
@@ -111,7 +117,7 @@ namespace GXPEngine.StageManagement
                     
                     case 124:
                         Heart heart = new Heart();
-                        heart.SetXY(col*tileSize, row * tileSize);
+                        heart.SetXY(col*tileSize + 16, row * tileSize + 16);
                         AddChild(heart);
                         break;
                     
@@ -254,29 +260,34 @@ namespace GXPEngine.StageManagement
 
             
             
-
-         
-
-            foreach (TiledObject obj in stageData.ObjectGroups[0].Objects)
+            //Creates signs or
+            //Creates text based on text placed in the tiledmap
+            if (stageData.ObjectGroups[0].Objects != null)
             {
-                switch (obj.ID)
+                foreach (TiledObject obj in stageData.ObjectGroups[0].Objects)
                 {
-                    //Creates text based on text placed in the tiledmap
-                    case 256:
-                        EasyDraw canvas = new EasyDraw((int)obj.Width * 5, (int)obj.Height*5, false);
-                        canvas.SetXY(obj.X,obj.Y);
-                        canvas.TextAlign(CenterMode.Min,CenterMode.Min);
-                        canvas.Text(obj.textField.text);
-                        layers[0].AddChild(canvas);
-                        break;
-                        
-                     case 257:
-                         Sign sign = new Sign(obj.Name);
-                         sign.SetXY(obj.X,obj.Y - 64);
-                         layers[0].AddChild(sign);
-                         break;
+                    switch (obj.ID)
+                    {
+                        case 257:
+                            Sign sign = new Sign(obj.Name);
+                            sign.SetXY(obj.X, obj.Y - 64);
+                            layers[0].AddChild(sign);
+                            break;
+
+                        default:
+                            EasyDraw canvas = new EasyDraw((int) obj.Width * 5, (int) obj.Height * 5, false);
+                            canvas.SetXY(obj.X, obj.Y);
+                            canvas.TextAlign(CenterMode.Min, CenterMode.Min);
+                            canvas.Text(obj.textField.text);
+                            layers[0].AddChild(canvas);
+                            break;
+                    }
                 }
             }
+            
+     
+            
+           
             
             foreach (Pivot pivot in layers)
             {
