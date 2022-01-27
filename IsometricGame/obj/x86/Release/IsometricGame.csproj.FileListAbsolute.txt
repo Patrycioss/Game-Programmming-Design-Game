@@ -1,6 +1,0 @@
-C:\Users\patri\Documents\CMGT\YEAR 1\Game Design\Isometric-Game-Term2\IsometricGame\bin\Release\IsometricGame.exe.config
-C:\Users\patri\Documents\CMGT\YEAR 1\Game Design\Isometric-Game-Term2\IsometricGame\bin\Release\IsometricGame.exe
-C:\Users\patri\Documents\CMGT\YEAR 1\Game Design\Isometric-Game-Term2\IsometricGame\obj\x86\Release\IsometricGame.csproj.AssemblyReference.cache
-C:\Users\patri\Documents\CMGT\YEAR 1\Game Design\Isometric-Game-Term2\IsometricGame\obj\x86\Release\IsometricGame.csproj.SuggestedBindingRedirects.cache
-C:\Users\patri\Documents\CMGT\YEAR 1\Game Design\Isometric-Game-Term2\IsometricGame\obj\x86\Release\IsometricGame.csproj.CoreCompileInputs.cache
-C:\Users\patri\Documents\CMGT\YEAR 1\Game Design\Isometric-Game-Term2\IsometricGame\obj\x86\Release\IsometricGame.exe

@@ -69,8 +69,11 @@ namespace GXPEngine.StageManagement
             for (int col = 0; col < mainLayer.Width; col++)
             for (int row = 0; row < mainLayer.Height; row++) 
             {
+                BlueGhost blueGhost;
                 switch (tileNumbers[col, row])
                 {
+                        
+                    
                 //Entities
                     case 210:
                         myGame.player = new Player();
@@ -96,15 +99,27 @@ namespace GXPEngine.StageManagement
                         layers[1].AddChild(flyer);
                         break;
                     
-                    case 128:
+                    case 118:
                         RedGhost redGhost = new RedGhost();
                         redGhost.SetXY(col*tileSize,row*tileSize);
                         layers[1].AddChild(redGhost);
                         break;
                     
                     case 130:
-                        BlueGhost blueGhost = new BlueGhost();
+                        blueGhost = new BlueGhost();
                         blueGhost.SetXY(col*tileSize,row*tileSize);
+                        layers[1].AddChild(blueGhost);
+                        break;
+
+                    case 119:
+                        blueGhost = new BlueGhost();
+                        blueGhost.SetXY(col * tileSize, row * tileSize);
+                        layers[1].AddChild(blueGhost);
+                        break;
+
+                    case 120:
+                        blueGhost = new BlueGhost();
+                        blueGhost.SetXY(col * tileSize, row * tileSize);
                         layers[1].AddChild(blueGhost);
                         break;
                     
@@ -265,14 +280,14 @@ namespace GXPEngine.StageManagement
             {
                 foreach (TiledObject obj in stageData.ObjectGroups[0].Objects)
                 {
-                    switch (obj.ID)
+                    switch (obj.GID)
                     {
-                        case 257:
+                        case 109:
                             Sign sign = new Sign(obj.Name);
                             sign.SetXY(obj.X, obj.Y - 64);
                             layers[0].AddChild(sign);
                             break;
-
+                        
                         default:
                             EasyDraw canvas = new EasyDraw((int) obj.Width * 5, (int) obj.Height * 5, false);
                             canvas.SetXY(obj.X, obj.Y);

@@ -1,8 +1,0 @@
-C:\Users\patri\Documents\CMGT\YEAR 1\Game Design\Isometric-Game-Term2\IsometricGame\bin\Debug\TotallyNotAMarioRipoff.exe.config
-C:\Users\patri\Documents\CMGT\YEAR 1\Game Design\Isometric-Game-Term2\IsometricGame\bin\Debug\TotallyNotAMarioRipoff.exe
-C:\Users\patri\Documents\CMGT\YEAR 1\Game Design\Isometric-Game-Term2\IsometricGame\bin\Debug\TotallyNotAMarioRipoff.pdb
-C:\Users\patri\Documents\CMGT\YEAR 1\Game Design\Isometric-Game-Term2\IsometricGame\obj\x86\Debug\TotallyNotAMarioRipoff.csproj.AssemblyReference.cache
-C:\Users\patri\Documents\CMGT\YEAR 1\Game Design\Isometric-Game-Term2\IsometricGame\obj\x86\Debug\TotallyNotAMarioRipoff.csproj.SuggestedBindingRedirects.cache
-C:\Users\patri\Documents\CMGT\YEAR 1\Game Design\Isometric-Game-Term2\IsometricGame\obj\x86\Debug\TotallyNotAMarioRipoff.csproj.CoreCompileInputs.cache
-C:\Users\patri\Documents\CMGT\YEAR 1\Game Design\Isometric-Game-Term2\IsometricGame\obj\x86\Debug\TotallyNotAMarioRipoff.exe
-C:\Users\patri\Documents\CMGT\YEAR 1\Game Design\Isometric-Game-Term2\IsometricGame\obj\x86\Debug\TotallyNotAMarioRipoff.pdb

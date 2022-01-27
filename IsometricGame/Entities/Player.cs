@@ -30,8 +30,9 @@ namespace GXPEngine.Entities
             //Movement   
             private readonly float  jumpForce;
             private readonly float gravitationalForce;
-            private readonly float baseSpeed;
             private readonly float runSpeed;
+           
+            private float baseSpeed;
             private float currentMovementSpeed;
         
             //Practical
@@ -269,6 +270,14 @@ namespace GXPEngine.Entities
         public void ToggleHitBox()
         {
             alpha = -alpha + 1;
+        }
+
+        /// <summary>
+        /// Overrides the currentmovementspeed with a given amount (!generally don't use this)
+        /// </summary>
+        public void SetBaseMovementSpeed(float amount)
+        {
+            baseSpeed = amount;
         }
         
         /// <summary>
