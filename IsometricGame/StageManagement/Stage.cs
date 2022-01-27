@@ -257,7 +257,6 @@ namespace GXPEngine.StageManagement
             barrier.width = 20;
             barrier.height = stageHeight;
             AddObjectAtLayer(barrier,1);
-
             
             
             //Creates signs or
@@ -284,17 +283,11 @@ namespace GXPEngine.StageManagement
                     }
                 }
             }
-            
-     
-            
-           
-            
+
             foreach (Pivot pivot in layers)
             {
                 AddChild(pivot);
             }
-            
-            
         }
 
         /// <summary>

@@ -67,13 +67,18 @@ namespace GXPEngine.Entities
 
         public override void PlaySound()
         {
-            if (soundDelay.finished || soundDelay.IsPaused)
+            if (sound != null)
             {
-                Console.WriteLine("hoi");
-                sound.Play(volume:volume);
-                soundDelay.Reset();
-                soundDelay.IsPaused = false;
-            } 
+                if (soundDelay.finished || soundDelay.IsPaused)
+                {
+                    Console.WriteLine("hoi");
+                    sound.Play(volume:volume);
+                    soundDelay.Reset();
+                    soundDelay.IsPaused = false;
+                } 
+            }
+            else Console.WriteLine("Tried to play sound but there isn't any!");
+          
             
         }
     }
