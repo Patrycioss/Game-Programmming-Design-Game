@@ -46,7 +46,7 @@ namespace GXPEngine.SpecialObjects
                     myGame.AddChild(myGame.menu);
                     myGame.ShowMouse(true);
 
-                    //myGame.menu.menuButtons[nextStage].Unlock();
+                    myGame.menu.menuButtons[nextStage].Unlock();
                 }
                 
                 else if (myGame.player.x > x && myGame.player.x < x + width)

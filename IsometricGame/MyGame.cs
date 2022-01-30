@@ -20,7 +20,7 @@ namespace GXPEngine
 		//From what x does the screen start scrolling
 		private readonly int scrollX;
 	
-		private MyGame() : base(1920, 1080, true, true, -1, -1, true)
+		private MyGame() : base(1920, 1080, false, true, -1, -1, true)
 		{
 			//From what point onwards the screen starts scrolling with the player
 			scrollX = width / 2;
@@ -48,30 +48,30 @@ namespace GXPEngine
 			
 			//DEBUG
 	
-				//Kills the player
-				if (Input.GetKey(Key.K))
-				{
-					player.Damage(3);
-				}
-			
-				//Damages the player for 1 hp
-				if (Input.GetKey((Key.J)))
-				{
-					player.Damage(1);
-				}
-		
-				//Toggle player hitbox
-				if (Input.GetKey(Key.H))
-				{
-					player.ToggleHitBox();
-				}
-
-				if (Input.GetKey(Key.R))
-				{ 
-					AddChild(menu);
-					RemoveChild(hud);
-					StageLoader.ClearStage();
-				}
+				// //Kills the player
+				// if (Input.GetKey(Key.K))
+				// {
+				// 	player.Damage(3);
+				// }
+				//
+				// //Damages the player for 1 hp
+				// if (Input.GetKey((Key.J)))
+				// {
+				// 	player.Damage(1);
+				// }
+				//
+				// //Toggle player hitbox
+				// if (Input.GetKey(Key.H))
+				// {
+				// 	player.ToggleHitBox();
+				// }
+				//
+				// if (Input.GetKey(Key.R))
+				// { 
+				// 	AddChild(menu);
+				// 	RemoveChild(hud);
+				// 	StageLoader.ClearStage();
+				// }
 			
 		
 		}

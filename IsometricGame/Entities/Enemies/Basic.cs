@@ -38,7 +38,7 @@ namespace GXPEngine.Entities.Enemies
             sound = new Sound("sounds/slime.ogg");
             volume = 1.0f;
             speed = 0.2f;
-            attackDamage = 2;
+            attackDamage = 1;
             health = 1;
         }
     }

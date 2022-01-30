@@ -1,4 +1,5 @@
-﻿using GXPEngine.StageManagement;
+﻿using GXPEngine.SpecialObjects.Collectibles;
+using GXPEngine.StageManagement;
 
 namespace GXPEngine.UserInterface.Menu
 {
@@ -91,6 +92,11 @@ namespace GXPEngine.UserInterface.Menu
             myGame.AddChild(myGame.hud);
             StageLoader.currentStage.x = 0;
             myGame.ShowMouse(false);
+
+            if (targetStage == Stages.Stage3)
+            {
+                myGame.player.currentPowerup = new FireBulletShooter();
+            }
 
         }
 

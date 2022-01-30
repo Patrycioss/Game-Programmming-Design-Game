@@ -18,8 +18,8 @@ namespace GXPEngine.UserInterface.Menu
 
             
             menuButtons.Add(Stages.Stage1,new MenuButton(Stages.Stage1, false, 10));
-            menuButtons.Add(Stages.Stage2,new MenuButton(Stages.Stage2, false, 8));
-            menuButtons.Add(Stages.Stage3,new MenuButton(Stages.Stage3, false, 9));
+            menuButtons.Add(Stages.Stage2,new MenuButton(Stages.Stage2, true, 10));
+            menuButtons.Add(Stages.Stage3,new MenuButton(Stages.Stage3, true, 10));
 
 
 
