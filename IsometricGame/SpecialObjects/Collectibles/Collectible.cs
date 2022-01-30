@@ -58,6 +58,16 @@
 
             pickupSound = new Sound("sounds/heart.wav");
         }
+
+        protected void Update()
+        {
+            if (DistanceTo(myGame.player) < 32 && myGame.player.health != myGame.player.maxHealth)
+            {
+                Action();
+                this.Destroy();
+            }
+        }
+        
         
         protected override void Action()
         {
