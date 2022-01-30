@@ -44,6 +44,7 @@ namespace GXPEngine.SpecialObjects
                     StageLoader.ClearStage();
                     myGame.hud = new Hud();
                     myGame.AddChild(myGame.menu);
+                    myGame.ShowMouse(true);
 
                     //myGame.menu.menuButtons[nextStage].Unlock();
                 }

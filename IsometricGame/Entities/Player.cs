@@ -245,7 +245,7 @@ namespace GXPEngine.Entities
             myGame.AddChild(myGame.menu);
             myGame.RemoveChild(myGame.hud);
             StageLoader.ClearStage();
-            
+            myGame.ShowMouse(true);
             Reset();
 
             //Also resets the hud for next use

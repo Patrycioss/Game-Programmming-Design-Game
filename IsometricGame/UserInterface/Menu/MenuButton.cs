@@ -90,6 +90,7 @@ namespace GXPEngine.UserInterface.Menu
             myGame.hud = new Hud();
             myGame.AddChild(myGame.hud);
             StageLoader.currentStage.x = 0;
+            myGame.ShowMouse(false);
 
         }
 
