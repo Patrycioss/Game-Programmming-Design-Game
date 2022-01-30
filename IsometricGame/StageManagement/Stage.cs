@@ -239,6 +239,7 @@ namespace GXPEngine.StageManagement
                                 break;
                             case Stages.Stage2:
                                 finish.SetNextStage(Stages.Stage3);
+                                myGame.player.currentPowerup = new FireBulletShooter();
                                 break;
                         }
                         AddChild(finish);

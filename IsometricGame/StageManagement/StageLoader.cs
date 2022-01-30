@@ -44,6 +44,11 @@ namespace GXPEngine.StageManagement
         {
             return currentStage.GetChildren();
         }
+
+        public static void AddObject(GameObject gameObject)
+        {
+            currentStage.AddChild(gameObject);
+        }
         
     }
 }

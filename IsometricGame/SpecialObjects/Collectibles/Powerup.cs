@@ -61,7 +61,7 @@ namespace GXPEngine.SpecialObjects.Collectibles
             {
                 useTimer = new Timer(coolDown);
 
-                // StageLoader.a(new FireBullet(speed, damage, myGame.player.mirrored),1);
+                StageLoader.AddObject(new FireBullet(speed, damage, myGame.player.mirrored));
             }
         }
 
