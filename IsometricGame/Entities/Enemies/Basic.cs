@@ -9,8 +9,12 @@ namespace GXPEngine.Entities.Enemies
     public class Basic : Enemy
     {
         //Base class for basic enemy ai (move until it hits something then turns around)
-        protected Basic(string filePath, int columns, int rows, int frames) : base(filePath, columns, rows, frames){}
+        protected Basic(string filePath, int columns, int rows, int frames) : base(filePath, columns, rows, frames)
+        {
+            _animationDelay = 50;
+        }
 
+        
         public override void Update()
         {
             Collision collision = MoveUntilCollision(speed * Time.deltaTime,0);

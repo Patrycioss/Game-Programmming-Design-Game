@@ -1,3 +1,5 @@
+using System.Runtime.InteropServices;
+using System.Threading;
 using GXPEngine.Entities;
 using GXPEngine.Extras;
 using GXPEngine.StageManagement;
@@ -13,12 +15,12 @@ namespace GXPEngine
 		public Hud hud;
 
 		private Sound music;
-		private float volume;
+		private float musicVolume;
 
 		//From what x does the screen start scrolling
 		private readonly int scrollX;
 	
-		private MyGame() : base(1920, 1080, true, true, -1, -1, true)
+		private MyGame() : base(1920, 1080, false, true, -1, -1, true)
 		{
 			//From what point onwards the screen starts scrolling with the player
 			scrollX = width / 2;
@@ -36,8 +38,8 @@ namespace GXPEngine
 			AddChild(currentBackground);
 			AddChild(menu);
 
-			volume = 0.2f;
-			music.Play(volume:volume);
+			musicVolume = 0.2f;
+			// music.Play(volume:musicVolume);
 		}
 	
 		void Update()
@@ -62,6 +64,13 @@ namespace GXPEngine
 				if (Input.GetKey(Key.H))
 				{
 					player.ToggleHitBox();
+				}
+
+				if (Input.GetKey(Key.R))
+				{ 
+					AddChild(menu);
+					RemoveChild(hud);
+					StageLoader.ClearStage();
 				}
 			
 		
@@ -91,9 +100,11 @@ namespace GXPEngine
 				{
 					StageLoader.currentStage.x = -StageLoader.currentStage.stageWidth + game.width;
 				}
+				
+				
 			}
 		}
-	
+		
 		static void Main()							// Main() is the first method that's called when the program is run
 		{
 			new MyGame().Start();					// Create a "MyGame" and start it

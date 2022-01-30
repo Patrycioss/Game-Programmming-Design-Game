@@ -95,7 +95,6 @@
     <Compile Include="SpecialObjects\Finish.cs" />
     <Compile Include="SpecialObjects\Sign.cs" />
     <Compile Include="StageManagement\Stage.cs" />
-    <Compile Include="StageManagement\StageCreator.cs" />
     <Compile Include="StageManagement\StageLoader.cs" />
     <Compile Include="StageManagement\Stages.cs" />
     <Compile Include="UserInterface\Hud.cs" />

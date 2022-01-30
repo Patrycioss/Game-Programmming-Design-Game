@@ -49,6 +49,9 @@ namespace GXPEngine.SpecialObjects.Collectibles
             coolDown = 1000;
             damage = 1;
 
+            _animationDelay = 120;
+
+            
             pickupSound = new Sound("sounds/fire.wav");
         }
 
@@ -58,7 +61,7 @@ namespace GXPEngine.SpecialObjects.Collectibles
             {
                 useTimer = new Timer(coolDown);
 
-                StageLoader.AddObjectAtLayer(new FireBullet(speed, damage, myGame.player.mirrored),1);
+                // StageLoader.a(new FireBullet(speed, damage, myGame.player.mirrored),1);
             }
         }
 

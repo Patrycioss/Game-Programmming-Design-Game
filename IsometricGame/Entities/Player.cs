@@ -1,4 +1,6 @@
-﻿using GXPEngine.Core;
+﻿using System.Management.Instrumentation;
+using System.Runtime.DesignerServices;
+using GXPEngine.Core;
 using GXPEngine.Extras;
 using GXPEngine.SpecialObjects.Collectibles;
 using GXPEngine.StageManagement;
@@ -40,6 +42,9 @@ namespace GXPEngine.Entities
 
         public Player() : base("sprites/player/hitbox.png", 1, 1, 1)
         {
+
+            _animationDelay = 120;
+            
             //Visual
             collider.isTrigger = true;
             alpha = 0;
@@ -320,17 +325,22 @@ namespace GXPEngine.Entities
         /// </summary>
         private void CheckForDamageFromEnemies()
         {
-            foreach (GameObject gameObject in StageLoader.currentStage.GetObjects())
+            foreach (GameObject gameObject in StageLoader.GetObjects())
             {
-                if (gameObject is Entity)
+                if (!Equals(gameObject))
                 {
-                    if (DistanceTo(gameObject) < 100)
+                    if (gameObject is Entity)
                     {
-                        if (HitTest(gameObject) && !(Equals(gameObject)))
+                        Entity entity = (Entity) gameObject;
+                        
+                        if (DistanceTo(entity) < 100)
                         {
-                            Damage(gameObject.attackDamage);
-                            gameObject.PlaySound();
-                            break;
+                            if (HitTest(entity))
+                            {
+                                Damage(entity.attackDamage);
+                                entity.PlaySound();
+                                break;
+                            }
                         }
                     }
                 }
@@ -342,7 +352,7 @@ namespace GXPEngine.Entities
         /// </summary>
         private void AnimatePlayerModel()
         {
-            sprite.Animate();
+            sprite.Animate(Time.deltaTime);
 
             if (mirrored)
             {

@@ -16,6 +16,7 @@ namespace GXPEngine.Entities.Enemies
         protected Ghost(string filePath, int columns, int rows, int frames) : base(filePath, columns, rows, frames)
         {
             SetCycle(0,2);
+            _animationDelay = 200;
             
             //desiredPosition is the position of the player
             desiredPosition = new Vector2(myGame.player.x, myGame.player.y);
@@ -43,7 +44,7 @@ namespace GXPEngine.Entities.Enemies
             //Mirror if necessary
             _mirrorX = (direction.x < 0);
             
-            Animate();
+            Animate(Time.deltaTime);
         }
     }
 

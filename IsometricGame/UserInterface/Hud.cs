@@ -102,7 +102,7 @@ namespace GXPEngine.UserInterface
             UpdateCanvas();
         }
         
-        public override void AddHealth(int amount)
+        public void AddHealth(int amount)
         {
             for (int i = 0; i < amount; i++)
             {

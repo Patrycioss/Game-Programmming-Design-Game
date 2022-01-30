@@ -24,28 +24,6 @@ namespace GXPEngine
 		
 		//SELF-ADDED
 		protected MyGame myGame;
-		public int attackDamage;
-		public int health;
-		
-		/// <summary>
-		/// This function exists here solely to allow it to be used with Hittest() information
-		/// </summary>
-		public virtual void Damage(int amount) {}
-		
-		/// <summary>
-		/// This function exists here solely to allow it to be used with Hittest() information
-		/// </summary>
-		public virtual void AddHealth(int amount) {}
-		
-		/// <summary>
-		/// This function exists here solely to allow it to be used with Hittest() information
-		/// </summary>
-		public virtual void Kill() {}
-		
-		/// <summary>
-		/// This function exists here solely to allow it to be used with Hittest() information
-		/// </summary>
-		public virtual void PlaySound(){}
 		
 		//------------------------------------------------------------------------------------------------------------------------
 		//														GameObject()

@@ -16,9 +16,11 @@ namespace GXPEngine.UserInterface.Menu
             //Initializing
             myGame.ShowMouse(true);
 
-            menuButtons.Add(Stages.Tutorial,new MenuButton(Stages.Tutorial, false, 9));
-            menuButtons.Add(Stages.Stage1,new MenuButton(Stages.Stage1, true, 10));
-            menuButtons.Add(Stages.Stage2,new MenuButton(Stages.Stage2, true, 8));
+            
+            menuButtons.Add(Stages.Stage1,new MenuButton(Stages.Stage1, false, 10));
+            menuButtons.Add(Stages.Stage2,new MenuButton(Stages.Stage2, false, 8));
+            menuButtons.Add(Stages.Stage3,new MenuButton(Stages.Stage3, false, 9));
+
 
 
             foreach (MenuButton selection in menuButtons.Values)
@@ -52,8 +54,8 @@ namespace GXPEngine.UserInterface.Menu
                     menuButtons[Stages.Stage2].SetXY(obj.X,obj.Y);
                     break;
                 
-                case "Tutorial":
-                    menuButtons[Stages.Tutorial].SetXY(obj.X,obj.Y);
+                case "Stage3":
+                    menuButtons[Stages.Stage3].SetXY(obj.X,obj.Y);
                     break;
             }
         }

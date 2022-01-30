@@ -2,6 +2,6 @@
 {
     public enum Stages
     {
-       Tutorial, Stage1, Stage2
+       Stage1, Stage2, Stage3
     }
 }

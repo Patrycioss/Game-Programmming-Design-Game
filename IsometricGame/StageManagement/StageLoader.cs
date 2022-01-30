@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace GXPEngine.StageManagement
 {
@@ -37,15 +38,11 @@ namespace GXPEngine.StageManagement
             }
             else throw new Exception("There isn't any stage at the moment to get rid of I'm afraid!");
         }
-        
-          
-        /// <summary>
-        /// Adds an object at the specified layer.
-        /// [0]: background; [1]: foreground;
-        /// </summary>
-        public static void AddObjectAtLayer(GameObject gameObject, int layer)
+
+
+        public static List<GameObject> GetObjects()
         {
-            currentStage.AddObjectAtLayer(gameObject,layer);
+            return currentStage.GetChildren();
         }
         
     }

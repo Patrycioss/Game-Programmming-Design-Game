@@ -10,6 +10,7 @@
         protected Collectible(string filePath, int columns, int rows, int frames) : base(filePath, columns, rows, frames, true)
         {
             collider.isTrigger = true;
+
         }
 
         protected void Update()
@@ -20,7 +21,7 @@
                 this.Destroy();
             }
 
-            AnimateFixed();
+            Animate(Time.deltaTime);
         }
         
         /// <summary>

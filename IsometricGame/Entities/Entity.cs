@@ -9,6 +9,9 @@ namespace GXPEngine.Entities
     public class Entity : AnimationSprite
     {
         //Stats
+        public int attackDamage { get; protected set; }
+        public int health { get; protected set; }
+
         public int maxHealth;
         protected float speed;
         
@@ -19,17 +22,20 @@ namespace GXPEngine.Entities
         protected Entity(string filePath, int columns, int rows, int frames, bool addCollider = true) : base(filePath, columns, rows, frames, true, addCollider)
         {
             soundDelay = new Timer(1000, true, false);
-            //This delayconstant is used by most entities
-            int delayConstant = 120;
+            _animationDelay = 100;
 
-            //Calculates the amount of animationdelay needed based on the constant and the delta time
-            if (Time.deltaTime > 1)
-            {
-                _animationDelay = (byte)(delayConstant / Time.deltaTime);
 
-                if (_animationDelay < 40) _animationDelay = 40;
-            }
-            else _animationDelay = 40;
+            // //This delayconstant is used by most entities
+            // int delayConstant = 120;
+            //
+            // //Calculates the amount of animationdelay needed based on the constant and the delta time
+            // if (Time.deltaTime > 1)
+            // {
+            //     _animationDelay = (byte)(delayConstant / Time.deltaTime);
+            //
+            //     if (_animationDelay < 40) _animationDelay = 40;
+            // }
+            // else _animationDelay = 40;
         }
 
         public virtual void Update(){}
@@ -38,7 +44,7 @@ namespace GXPEngine.Entities
         /// <summary>
         /// Damages this entity for a certain amount of its health
         /// </summary>
-        public override void Damage(int amount)
+        public virtual void Damage(int amount)
         {
             //All entities can receive damage, this class also exists empty in GameObject so we can access this function when we use Hittest()
             
@@ -53,7 +59,7 @@ namespace GXPEngine.Entities
         /// <summary>
         /// Adds a certain amount of health to this entity's healthpool
         /// </summary>
-        public override void AddHealth(int amount)
+        public virtual void AddHealth(int amount)
         {
             health += amount;
             if (health > maxHealth) health = maxHealth;
@@ -62,12 +68,12 @@ namespace GXPEngine.Entities
         /// <summary>
         /// Kills this entity
         /// </summary>
-        public override void Kill()
+        public virtual void Kill()
         {
             LateDestroy();
         }
 
-        public override void PlaySound()
+        public virtual void PlaySound()
         {
             if (sound != null)
             {

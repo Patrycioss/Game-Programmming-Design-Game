@@ -46,7 +46,7 @@ namespace GXPEngine.Entities
         {
             Collision tileCollision = MoveUntilCollision(speed * Time.deltaTime, 0, true);
 
-            Animate();
+            Animate(Time.deltaTime);
 
             //Kills itself if it collides with a tile
             if (tileCollision != null)
@@ -59,7 +59,8 @@ namespace GXPEngine.Entities
             {
                 if (gameObject is Enemy)
                 {
-                    gameObject.Damage(attackDamage);
+                    Enemy enemy = (Enemy) gameObject;
+                    enemy.Damage(attackDamage);
                     Kill();
 
                     break;
