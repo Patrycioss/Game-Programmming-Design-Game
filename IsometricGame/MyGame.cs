@@ -20,7 +20,7 @@ namespace GXPEngine
 		//From what x does the screen start scrolling
 		private readonly int scrollX;
 	
-		private MyGame() : base(1920, 1080, false, true, -1, -1, true)
+		private MyGame() : base(1920, 1080, true, true, -1, -1, true)
 		{
 			//From what point onwards the screen starts scrolling with the player
 			scrollX = width / 2;
@@ -39,7 +39,7 @@ namespace GXPEngine
 			AddChild(menu);
 
 			musicVolume = 0.2f;
-			// music.Play(volume:musicVolume);
+			music.Play(volume:musicVolume);
 		}
 	
 		void Update()
