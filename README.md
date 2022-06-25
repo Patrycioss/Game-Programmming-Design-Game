@@ -1,6 +1,6 @@
 # Totally not a mario ripoff
 
-![generic screenshot](https://user-images.githubusercontent.com/72610925/175666848-af7c9c85-4931-42e3-9c1f-9067a8628623.png)
+![GifBig](https://user-images.githubusercontent.com/72610925/175789771-5eecfaad-5dea-4b06-9457-6733d91b55e0.gif)
 
 
 ## Information
@@ -25,3 +25,6 @@ The game is made in an in-house engine from Saxion called GXP and uses Tiled to 
 
 ### Sounds:
 * 8-bit Video Game Sounds - ProjectsU012 - https://freesound.org/people/ProjectsU012/packs/18837/?page=3#sound
+
+![Gif2small](https://user-images.githubusercontent.com/72610925/175789774-def6fac5-2dcc-410f-88da-6bbd1bc3a4fe.gif)
+![Gif3small](https://user-images.githubusercontent.com/72610925/175789776-df0b18a7-3c98-465c-bbc6-2a059129f7d4.gif)
