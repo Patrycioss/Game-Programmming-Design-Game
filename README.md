@@ -4,10 +4,17 @@
 
 
 ## Information
-Small platformer game featuring 3 stages made for my study, Creative Media and Game Technologies at Saxion University of Applied Sciences in Enschede. 
+Small platformer game featuring 3 stages I made for my study, Creative Media and Game Technologies at Saxion University of Applied Sciences in Enschede. 
 The game is made in an in-house engine from Saxion called GXP and uses Tiled to load in spritesheets.
 
-## Credits
+## Controls
+| Action  | Keys    |
+|---------|---------|
+| Walking | `A` & `D`  |
+| Jump    | `SPACE` |
+| Shoot   | `F`     |
+
+## Assets Credits
 
 ### Especially:
 * Sokoban Spritesheet - Kenney - https://www.kenney.nl/assets/sokoban
